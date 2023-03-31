@@ -9,9 +9,9 @@ public abstract class User {
     }
     private static int countForId;
     private final String idUser;
-    private String email;
-    private String number;
-    private String password;
+    protected String email;
+    protected String number;
+    protected String password;
     private UserType userType;
 
     public String getId() {
@@ -22,24 +22,12 @@ public abstract class User {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public UserType getUserType() {
