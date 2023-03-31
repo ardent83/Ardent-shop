@@ -2,11 +2,11 @@ package model.for_item;
 import model.for_user.User;
 
 public class Comment {
-    public Comment(User commentUser, String idItem, String commentText, CommentStatus commentStatus, boolean buyer) {
+    public Comment(User commentUser, String idItem, String commentText, boolean buyer) {
         this.commentUser = commentUser;
         this.idItem = idItem;
         this.commentText = commentText;
-        this.commentStatus = commentStatus;
+        this.commentStatus = CommentStatus.WAITING;
         this.buyer = buyer;
     }
     private User commentUser;
