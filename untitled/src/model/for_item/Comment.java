@@ -31,6 +31,10 @@ public class Comment {
         return commentStatus;
     }
 
+    public void setCommentStatus(CommentStatus commentStatus) {
+        this.commentStatus = commentStatus;
+    }
+
     public boolean isBuyer() {
         return buyer;
     }
