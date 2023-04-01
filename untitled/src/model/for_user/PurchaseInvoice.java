@@ -12,13 +12,14 @@ public class PurchaseInvoice {
         this.date = formatter.format(tempDate);
         this.amountPaid = amountPaid;
         this.itemArrayList = new ArrayList<>(itemArrayList);
+        countForId++;
     }
 
     private static int countForId;
-    private String idPurchaseInvoice;
-    private String date;
-    private double amountPaid;
-    private ArrayList<Item> itemArrayList;
+    private final String idPurchaseInvoice;
+    private final String date;
+    private final double amountPaid;
+    private final ArrayList<Item> itemArrayList;
 
     public static int getCountForId() {
         return countForId;
