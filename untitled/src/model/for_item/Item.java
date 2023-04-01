@@ -10,6 +10,7 @@ public abstract class Item {
         this.availableNumber = availableNumber;
         this.category = category;
         this.commentArrayList = new ArrayList<>();
+        countForId++;
     }
     private static int countForId;
     private final String idItem;
@@ -17,7 +18,7 @@ public abstract class Item {
     private double price;
     private int availableNumber;
     private double averageScore;
-    private Category category;
+    private final Category category;
     private ArrayList<Comment> commentArrayList;
 
     public String getId() {
@@ -54,6 +55,9 @@ public abstract class Item {
 
     public Category getCategory() {
         return category;
+    }
+    public void addComment(Comment comment){
+        this.commentArrayList.add(comment);
     }
 
     static {
