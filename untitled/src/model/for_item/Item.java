@@ -8,8 +8,10 @@ public abstract class Item {
         this.name = name;
         this.price = price;
         this.availableNumber = availableNumber;
+        this.averageScore = 0;
         this.category = category;
         this.commentArrayList = new ArrayList<>();
+        this.scoreArrayList = new ArrayList<>();
         countForId++;
     }
     private static int countForId;
@@ -20,8 +22,9 @@ public abstract class Item {
     private double averageScore;
     private final Category category;
     private ArrayList<Comment> commentArrayList;
+    private ArrayList<Score> scoreArrayList;
 
-    public String getId() {
+    public String getIdItem() {
         return idItem;
     }
 
@@ -53,11 +56,22 @@ public abstract class Item {
         return averageScore;
     }
 
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
+    }
+
     public Category getCategory() {
         return category;
     }
     public void addComment(Comment comment){
         this.commentArrayList.add(comment);
+    }
+
+    public ArrayList<Score> getScoreArrayList() {
+        return scoreArrayList;
+    }
+    public void addScore(Score score){
+        this.scoreArrayList.add(score);
     }
 
     static {
