@@ -7,6 +7,8 @@ public class Score {
         this.user = user;
         this.score = score;
         this.item = item;
+        item.setAverageScore(((item.getAverageScore()*item.getScoreArrayList().size())+score)/(item.getScoreArrayList().size()+1));
+        item.addScore(this);
     }
     private final User user;
     private double score;
