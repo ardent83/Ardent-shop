@@ -23,9 +23,9 @@ public class Admin extends User {
         }
         return admin;
     }
-    ArrayList<Item> itemArrayList;
-    ArrayList<Buyer> buyerArrayList;
-    ArrayList<Request> requestArrayList;
+    private ArrayList<Item> itemArrayList;
+    private ArrayList<Buyer> buyerArrayList;
+    public ArrayList<Request> requestArrayList;
 
     public ArrayList<Request> getRequestArrayList() {
         return requestArrayList;
@@ -60,4 +60,9 @@ public class Admin extends User {
     public ArrayList<Buyer> getBuyerArrayList() {
         return buyerArrayList;
     }
+
+    public ArrayList<Item> getItemArrayList() {
+        return itemArrayList;
+    }
+
 }
