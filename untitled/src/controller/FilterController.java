@@ -18,8 +18,8 @@ import model.for_user.Admin;
 import java.util.ArrayList;
 
 public class FilterController {
-    Admin admin = Admin.getAdmin();
-    ArrayList<Item> filterCategory(Category category){
+     private Admin admin = Admin.getAdmin();
+    public ArrayList<Item> filterCategory(Category category){
         ArrayList<Item> items = new ArrayList<>();
         for (Item item : admin.getItemArrayList()){
             if(item.getCategory().equals(category)){
@@ -28,7 +28,7 @@ public class FilterController {
         }
         return items;
     }
-    ArrayList<Item> filterSubCategory(SubCategory subCategory){
+    public ArrayList<Item> filterSubCategory(SubCategory subCategory){
         ArrayList<Item> items = new ArrayList<>();
         if(subCategory.equals(SubCategory.USB)){
             for (Item item : filterCategory(Category.DIGITAL)){
@@ -81,7 +81,7 @@ public class FilterController {
         }
         return items;
     }
-    ArrayList<Item> filterProperty(SubCategory subCategory, double capacity){
+    public ArrayList<Item> filterProperty(SubCategory subCategory, double capacity){
         ArrayList<Item> items = new ArrayList<>();
         if (subCategory.equals(SubCategory.USB)) {
             for (Item item : filterSubCategory(SubCategory.USB)){
@@ -112,7 +112,7 @@ public class FilterController {
         }
         return items;
     }
-    ArrayList<Item> filterProperty(PencilType pencilType){
+    public ArrayList<Item> filterProperty(PencilType pencilType){
         ArrayList<Item> items = new ArrayList<>();
         for (Item item : filterSubCategory(SubCategory.PENCIL)){
             if(item instanceof Pencil){
@@ -123,7 +123,7 @@ public class FilterController {
         }
         return items;
     }
-    ArrayList<Item> filterProperty(String color){
+    public ArrayList<Item> filterProperty(String color){
         ArrayList<Item> items = new ArrayList<>();
         for (Item item : filterSubCategory(SubCategory.PEN)){
             if (item instanceof Pen){
@@ -134,7 +134,7 @@ public class FilterController {
         }
         return items;
     }
-    ArrayList<Item> filterProperty(int numberOfPage){
+    public ArrayList<Item> filterProperty(int numberOfPage){
         ArrayList<Item> items = new ArrayList<>();
         for (Item item : filterSubCategory(SubCategory.NOTEBOOK)){
             if(item instanceof NoteBook){
@@ -145,7 +145,7 @@ public class FilterController {
         }
         return items;
     }
-    ArrayList<Item> filterProperty(BikeType bikeType){
+    public ArrayList<Item> filterProperty(BikeType bikeType){
         ArrayList<Item> items = new ArrayList<>();
         for (Item item : filterSubCategory(SubCategory.BIKE)){
             if (item instanceof Bike){
@@ -156,7 +156,7 @@ public class FilterController {
         }
         return items;
     }
-    ArrayList<Item> filterProperty(boolean isAutomatic){
+    public ArrayList<Item> filterProperty(boolean isAutomatic){
         ArrayList<Item> items = new ArrayList<>();
         for (Item item : filterSubCategory(SubCategory.CAR)){
             if(item instanceof Car){
@@ -167,7 +167,7 @@ public class FilterController {
         }
         return items;
     }
-    ArrayList<Item> filterPrice(double firstRang, double lastRang , ArrayList<Item> items){
+    public ArrayList<Item> filterPrice(double firstRang, double lastRang , ArrayList<Item> items){
         for (Item item : items){
             if (item.getPrice() < firstRang || item.getPrice() > lastRang){
                 items.remove(item);
@@ -175,7 +175,7 @@ public class FilterController {
         }
         return items;
     }
-    ArrayList<Item> filterAvailableItem(ArrayList<Item> items){
+    public ArrayList<Item> filterAvailableItem(ArrayList<Item> items){
         for (Item item : items){
             if (item.getAvailableNumber() == 0){
                 items.remove(item);
