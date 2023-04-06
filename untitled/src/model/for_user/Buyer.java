@@ -33,7 +33,7 @@ public class Buyer extends User {
         this.password = password;
     }
 
-    public ArrayList<Item> getIteamArrayList(){
+    public ArrayList<Item> getItemArrayList(){
         return admin.getItemArrayList();
     }
     private FilterController filterController;
