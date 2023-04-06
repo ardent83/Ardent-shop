@@ -25,7 +25,7 @@ public class Admin extends User {
     }
     private ArrayList<Item> itemArrayList;
     private ArrayList<Buyer> buyerArrayList;
-    public ArrayList<Request> requestArrayList;
+    private ArrayList<Request> requestArrayList;
 
     public ArrayList<Request> getRequestArrayList() {
         return requestArrayList;
@@ -35,10 +35,13 @@ public class Admin extends User {
         if(request instanceof SignUpRequest){
             Buyer buyer = new Buyer(((SignUpRequest) request).getEmail(),((SignUpRequest) request).getNumber(),((SignUpRequest) request).getPassword());
             buyerArrayList.add(buyer);
+            requestArrayList.remove(request);
         } else if (request instanceof CommentRequest) {
             ((CommentRequest) request).getComment().setCommentStatus(CommentStatus.ACCEPTED);
+            requestArrayList.remove(request);
         } else if (request instanceof IncreaseCreditRequest){
             ((IncreaseCreditRequest) request).getBuyer().setAccountCredit(((IncreaseCreditRequest) request).getBuyer().getAccountCredit() + ((IncreaseCreditRequest) request).getIncreaseAmount());
+            requestArrayList.remove(request);
         }
     }
     public void addItem(Item item){
