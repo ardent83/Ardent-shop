@@ -183,4 +183,7 @@ public class FilterController {
         }
         return items;
     }
+    public ArrayList<Item> removeAllFilter(){
+        return admin.getItemArrayList();
+    }
 }
