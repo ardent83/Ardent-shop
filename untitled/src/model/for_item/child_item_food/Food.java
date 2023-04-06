@@ -4,8 +4,8 @@ import model.for_item.Category;
 import model.for_item.Item;
 
 public class Food extends Item {
-    public Food(String name, double price, int availableNumber, Category category, String productionDate, String expirationDate) {
-        super(name, price, availableNumber, category);
+    public Food(String name, double price, int availableNumber, String productionDate, String expirationDate) {
+        super(name, price, availableNumber, Category.FOOD);
         this.productionDate = productionDate;
         this.expirationDate = expirationDate;
     }

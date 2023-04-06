@@ -3,8 +3,8 @@ package model.for_item.child_item_digital;
 import model.for_item.Category;
 
 public class Ssd extends StorageEquipment {
-    public Ssd(String name, double price, int availableNumber, Category category, double weight, double volume, double capacity, double readSpeed, double writSpeed) {
-        super(name, price, availableNumber, category, weight, volume, capacity);
+    public Ssd(String name, double price, int availableNumber, double weight, double volume, double capacity, double readSpeed, double writSpeed) {
+        super(name, price, availableNumber, weight, volume, capacity);
         this.readSpeed = readSpeed;
         this.writSpeed = writSpeed;
     }
