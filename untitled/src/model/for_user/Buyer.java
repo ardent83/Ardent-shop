@@ -36,7 +36,11 @@ public class Buyer extends User {
     public ArrayList<Item> getIteamArrayList(){
         return admin.getItemArrayList();
     }
-    public FilterController filterController;
+    private FilterController filterController;
+    public FilterController getFilterController() {
+        return filterController;
+    }
+
     public ArrayList<Item> searchItem(String nameItem){
         ArrayList<Item> searchResults = new ArrayList<>();
         for (Item item : admin.getItemArrayList()){
