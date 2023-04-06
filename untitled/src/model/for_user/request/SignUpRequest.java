@@ -3,11 +3,11 @@ package model.for_user.request;
 import model.for_user.UserType;
 
 public class SignUpRequest extends Request {
-    public SignUpRequest(String email, String number, String password, UserType userType) {
+    public SignUpRequest(String email, String number, String password) {
         this.email = email;
         this.number = number;
         this.password = password;
-        this.userType = userType;
+        this.userType = UserType.BUYER;
     }
 
     private final String email;
