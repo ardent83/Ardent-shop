@@ -4,8 +4,8 @@ import model.for_item.Category;
 import model.for_item.Item;
 
 public abstract class Vehicles extends Item {
-    public Vehicles(String name, double price, int availableNumber, Category category, String companyName) {
-        super(name, price, availableNumber, category);
+    public Vehicles(String name, double price, int availableNumber, String companyName) {
+        super(name, price, availableNumber, Category.VEHICLES);
         this.companyName = companyName;
     }
     private final String companyName;
