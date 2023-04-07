@@ -175,6 +175,14 @@ public class FilterController {
         }
         return items;
     }
+    public ArrayList<Item> filterScore(double firstRang, double lastRang , ArrayList<Item> items){
+        for (Item item : items) {
+            if (item.getAverageScore() < firstRang || item.getAverageScore() > lastRang){
+                items.remove(item);
+            }
+        }
+        return items;
+    }
     public ArrayList<Item> filterAvailableItem(ArrayList<Item> items){
         for (Item item : items){
             if (item.getAvailableNumber() == 0){
