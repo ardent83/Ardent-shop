@@ -3,6 +3,7 @@ package controller;
 import model.for_item.Item;
 import model.for_user.Admin;
 import model.for_user.Buyer;
+import model.for_user.PurchaseInvoice;
 import model.for_user.request.IncreaseCreditRequest;
 import model.for_user.request.SignUpRequest;
 
@@ -168,6 +169,7 @@ public class BuyerController {
                     }
                 }
             }
+            buyer.getPurchaseHistoryArrayList().add(new PurchaseInvoice(amount, buyer.getCart()));
             buyer.getCart().removeAll(buyer.getCart());
             return true;
         }
