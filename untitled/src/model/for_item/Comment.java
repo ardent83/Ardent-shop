@@ -9,11 +9,11 @@ public class Comment {
         this.commentStatus = CommentStatus.WAITING;
         this.buyer = buyer;
     }
-    private User commentUser;
-    private String idItem;
-    private String commentText;
+    private final User commentUser;
+    private final String idItem;
+    private final String commentText;
     private CommentStatus commentStatus;
-    private boolean buyer;
+    private final boolean buyer;
 
     public User getCommentUser() {
         return commentUser;
@@ -37,5 +37,19 @@ public class Comment {
 
     public boolean isBuyer() {
         return buyer;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\nuser ID : ").append(commentUser);
+        if (buyer){
+            stringBuilder.append("\nis a buyer");
+        } else {
+            stringBuilder.append("\nnot a buyer");
+        }
+        stringBuilder.append("\n").append(commentText);
+
+        return  stringBuilder.toString();
     }
 }

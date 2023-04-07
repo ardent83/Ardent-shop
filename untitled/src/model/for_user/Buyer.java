@@ -22,7 +22,7 @@ public class Buyer extends User {
     private double accountCredit;
 
     public void setEmail(String email) {
-        super.email = email;
+        this.email = email;
     }
 
     public void setNumber(String number) {
@@ -119,5 +119,15 @@ public class Buyer extends User {
 
     public double getAccountCredit() {
         return accountCredit;
+    }
+
+    @Override
+    public String toString() {
+        return   ("Username : " + idUser +
+                "\nPassword : " + password +
+                "\nEmail : " + email +
+                "\nNumber : " + number +
+                "\nAccount credit : " + accountCredit +
+                "\nUser type : " + userType);
     }
 }
