@@ -13,11 +13,11 @@ public abstract class User {
         countForId++;
     }
     private static int countForId;
-    private final String idUser;
+    protected final String idUser;
     protected String email;
     protected String number;
     protected String password;
-    private final UserType userType;
+    protected final UserType userType;
 
     public String getId() {
         return idUser;
