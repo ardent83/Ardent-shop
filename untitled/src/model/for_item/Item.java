@@ -67,6 +67,10 @@ public abstract class Item {
         this.commentArrayList.add(comment);
     }
 
+    public ArrayList<Comment> getCommentArrayList() {
+        return commentArrayList;
+    }
+
     public ArrayList<Score> getScoreArrayList() {
         return scoreArrayList;
     }
