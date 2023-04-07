@@ -64,23 +64,43 @@ public class BuyerController {
         }
         return new Buyer("null","null","null");
     }
-    public boolean editEmail(Buyer buyer, String email){
+    public int editEmail(Buyer buyer, String email){
         Pattern patternEmail = Pattern.compile("^\\w+@(gmail|yahoo)\\.com$");
         Matcher matcherEmail = patternEmail.matcher(email);
-        if (matcherEmail.find()){
-            buyer.setEmail(email);
-            return true;
+
+        boolean emailNotExist = true;
+        for (Buyer buyer1 : admin.getBuyerArrayList()){
+            if (buyer1.getEmail().equals(email)){
+                emailNotExist = false;
+            }
         }
-        return false;
+
+        if (matcherEmail.find() && emailNotExist){
+            buyer.setEmail(email);
+            return 0;
+        }else if (!(matcherEmail.find())){
+            return 1;
+        }
+        return 2;
     }
-    public boolean editNumber(Buyer buyer, String number){
+    public int editNumber(Buyer buyer, String number){
         Pattern patternNumber = Pattern.compile("\\d{11}");
         Matcher matcherNumber = patternNumber.matcher(number);
-        if (matcherNumber.find()){
-            buyer.setNumber(number);
-            return true;
+
+        boolean numberNotExist = true;
+        for (Buyer buyer1 : admin.getBuyerArrayList()){
+            if (buyer1.getNumber().equals(number)){
+                numberNotExist = false;
+            }
         }
-        return false;
+
+        if (matcherNumber.find() && numberNotExist){
+            buyer.setNumber(number);
+            return 0;
+        } else if (!(matcherNumber.find())) {
+            return 1;
+        }
+        return 2;
     }
     public boolean editPassword(Buyer buyer, String password){
         Pattern patternPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$");
