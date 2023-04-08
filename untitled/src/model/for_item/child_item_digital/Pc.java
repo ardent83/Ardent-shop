@@ -2,6 +2,7 @@ package model.for_item.child_item_digital;
 
 import model.for_item.Category;
 import model.for_item.Comment;
+import model.for_item.CommentStatus;
 
 public class Pc extends DigitalItem {
     public Pc(String name, double price, int availableNumber, double weight, double volume, String modelCpu, double ramCapacity) {
@@ -36,8 +37,10 @@ public class Pc extends DigitalItem {
                 .append("\nRAM capacity : ").append(ramCapacity)
                 .append("\n______________________________________________________");
                 for (Comment comment : super.getCommentArrayList()) {
-                    stringBuilder.append(comment.toString());
-                    stringBuilder.append("\n______________________________________________________");
+                    if (comment.getCommentStatus().equals(CommentStatus.ACCEPTED)){
+                        stringBuilder.append(comment);
+                        stringBuilder.append("\n______________________________________________________");
+                    }
                 }
                 stringBuilder.append("\n***********************************************");
         return stringBuilder.toString();

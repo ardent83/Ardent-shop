@@ -2,6 +2,7 @@ package model.for_item.child_item_stationary;
 
 import model.for_item.Category;
 import model.for_item.Comment;
+import model.for_item.CommentStatus;
 
 public class Pen extends Stationary{
     public Pen(String name, double price, int availableNumber, String producingCountry, String color) {
@@ -27,8 +28,10 @@ public class Pen extends Stationary{
                 .append("\ncolor : ").append(color)
                 .append("\n______________________________________________________");
         for (Comment comment : super.getCommentArrayList()) {
-            stringBuilder.append(comment.toString());
-            stringBuilder.append("\n______________________________________________________");
+            if (comment.getCommentStatus().equals(CommentStatus.ACCEPTED)){
+                stringBuilder.append(comment);
+                stringBuilder.append("\n______________________________________________________");
+            }
         }
         stringBuilder.append("\n***********************************************");
         return stringBuilder.toString();

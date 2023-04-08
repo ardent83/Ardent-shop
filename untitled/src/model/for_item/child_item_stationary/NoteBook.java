@@ -2,6 +2,7 @@ package model.for_item.child_item_stationary;
 
 import model.for_item.Category;
 import model.for_item.Comment;
+import model.for_item.CommentStatus;
 
 public class NoteBook extends Stationary {
     public NoteBook(String name, double price, int availableNumber, String producingCountry, int numberOfPage, String paperType) {
@@ -34,8 +35,10 @@ public class NoteBook extends Stationary {
                 .append("\npaper type : ").append(paperType)
                 .append("\n______________________________________________________");
         for (Comment comment : super.getCommentArrayList()) {
-            stringBuilder.append(comment.toString());
-            stringBuilder.append("\n______________________________________________________");
+            if (comment.getCommentStatus().equals(CommentStatus.ACCEPTED)){
+                stringBuilder.append(comment);
+                stringBuilder.append("\n______________________________________________________");
+            }
         }
         stringBuilder.append("\n***********************************************");
         return stringBuilder.toString();

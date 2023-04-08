@@ -2,6 +2,7 @@ package model.for_item.child_item_digital;
 
 import model.for_item.Category;
 import model.for_item.Comment;
+import model.for_item.CommentStatus;
 
 public class Usb extends StorageEquipment {
     public Usb(String name, double price, int availableNumber, double weight, double volume, double capacity, double usbVersion) {
@@ -28,8 +29,10 @@ public class Usb extends StorageEquipment {
                 .append("\nUSB version : ").append(usbVersion)
                 .append("\n______________________________________________________");
         for (Comment comment : super.getCommentArrayList()) {
-            stringBuilder.append(comment.toString());
-            stringBuilder.append("\n______________________________________________________");
+            if (comment.getCommentStatus().equals(CommentStatus.ACCEPTED)){
+                stringBuilder.append(comment);
+                stringBuilder.append("\n______________________________________________________");
+            }
         }
         stringBuilder.append("\n***********************************************");
         return stringBuilder.toString();
