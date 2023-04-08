@@ -6,6 +6,11 @@ public abstract class Request {
     }
     protected String idRequest;
     private static int countForId;
+
+    public String getIdRequest() {
+        return idRequest;
+    }
+
     static {
         countForId = 0;
     }
