@@ -1,6 +1,7 @@
 package controller;
 
 import model.for_item.CommentStatus;
+import model.for_item.Item;
 import model.for_item.child_item_digital.Pc;
 import model.for_item.child_item_digital.Ssd;
 import model.for_item.child_item_digital.Usb;
@@ -57,5 +58,32 @@ public class AdminController {
         } else if (request instanceof IncreaseCreditRequest){
             admin.getRequestArrayList().remove(request);
         }
+    }
+    public boolean editName(String idItem, String newName){
+        for (Item item : admin.getItemArrayList()){
+            if (item.getIdItem().equals(idItem)){
+                admin.editNameItem(item, newName);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean editPrice(String idItem, double newPrice){
+        for (Item item : admin.getItemArrayList()){
+            if (item.getIdItem().equals(idItem)){
+                admin.editPriceItem(item, newPrice);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean editAvailableNumber1(String idItem, int newAvailableNumber){
+        for (Item item : admin.getItemArrayList()){
+            if (item.getIdItem().equals(idItem)){
+                admin.editAvailableNumber(item, newAvailableNumber);
+                return true;
+            }
+        }
+        return false;
     }
 }
