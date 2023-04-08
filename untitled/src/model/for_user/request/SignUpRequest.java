@@ -30,4 +30,11 @@ public class SignUpRequest extends Request {
     public UserType getUserType() {
         return userType;
     }
+
+    public String toString() {
+        return (new StringBuilder().append("\nRequest ID : ").append(super.idRequest).append("\n")
+                .append("\nemail : ").append(email)
+                .append("\nnumber : ").append(number)
+                .append("\npassword : ").append( number).toString());
+    }
 }
