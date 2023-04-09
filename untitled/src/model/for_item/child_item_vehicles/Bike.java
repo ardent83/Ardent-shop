@@ -1,6 +1,5 @@
 package model.for_item.child_item_vehicles;
 
-import model.for_item.Category;
 import model.for_item.Comment;
 
 public class Bike extends Vehicles {
