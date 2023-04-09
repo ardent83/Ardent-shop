@@ -48,16 +48,31 @@ public class AdminController {
     public void addCar(String name, double price, int availableNumber, String companyName, double engineVolume, boolean automatic){
         admin.getItemArrayList().add(new Car(name, price, availableNumber, companyName, engineVolume, automatic));
     }
-
-    public void requestRejection(Request request){
-        if(request instanceof SignUpRequest){
-            admin.getRequestArrayList().remove(request);
-        } else if (request instanceof CommentRequest) {
-            ((CommentRequest) request).getComment().setCommentStatus(CommentStatus.FAILED);
-            admin.getRequestArrayList().remove(request);
-        } else if (request instanceof IncreaseCreditRequest){
-            admin.getRequestArrayList().remove(request);
+    public boolean acceptRequest1(String idRequest){
+        for (Request request : admin.getRequestArrayList()){
+            if (request.getIdRequest().equals(idRequest)){
+                admin.acceptRequest(request);
+                return true;
+            }
         }
+        return false;
+    }
+
+    public boolean requestRejection1(String idRequest){
+        for (Request request : admin.getRequestArrayList()){
+            if (request.getIdRequest().equals(idRequest)){
+                if(request instanceof SignUpRequest){
+                    admin.getRequestArrayList().remove(request);
+                } else if (request instanceof CommentRequest) {
+                    ((CommentRequest) request).getComment().setCommentStatus(CommentStatus.FAILED);
+                    admin.getRequestArrayList().remove(request);
+                } else if (request instanceof IncreaseCreditRequest){
+                    admin.getRequestArrayList().remove(request);
+                }
+                return true;
+            }
+        }
+        return false;
     }
     public boolean editName(String idItem, String newName){
         for (Item item : admin.getItemArrayList()){
