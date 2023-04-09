@@ -53,6 +53,7 @@ public class ItemPanelBuyer extends ItemPanel{
     @Override
     protected void postAComment(String idItem) {
         System.out.println("\nPlease enter your comment ");
+        input.nextLine();
         String commentText = input.nextLine();
         if (buyer.postAComment(idItem, commentText)) {
             System.out.println("\nThe comment was sent successfully");
