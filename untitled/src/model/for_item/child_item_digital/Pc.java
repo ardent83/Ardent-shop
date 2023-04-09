@@ -31,7 +31,7 @@ public class Pc extends DigitalItem {
                 .append("\nprice : ").append(super.getPrice())
                 .append("\navailable number : ").append(super.getAvailableNumber())
                 .append("\ncategory : ").append(super.getCategory())
-                .append("\nwight : ").append(super.toString())
+                .append("\nwight : ").append(super.getWeight())
                 .append("\nvolume : ").append(super.getVolume())
                 .append("\nmodel CPU : ").append(modelCpu)
                 .append("\nRAM capacity : ").append(ramCapacity)
