@@ -35,6 +35,6 @@ public class SignUpRequest extends Request {
         return (new StringBuilder().append("\nRequest ID : ").append(super.idRequest).append("\n")
                 .append("\nemail : ").append(email)
                 .append("\nnumber : ").append(number)
-                .append("\npassword : ").append( number).toString());
+                .append("\npassword : ").append( password).toString());
     }
 }
