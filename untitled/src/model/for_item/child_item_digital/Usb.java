@@ -1,6 +1,5 @@
 package model.for_item.child_item_digital;
 
-import model.for_item.Category;
 import model.for_item.Comment;
 import model.for_item.CommentStatus;
 

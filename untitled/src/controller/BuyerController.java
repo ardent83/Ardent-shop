@@ -34,10 +34,8 @@ public class BuyerController {
             }
         }
 
-        if(matcherEmail.find() && matcherNumber.find() && matcherPassword.find() && emailNotExist && numberNotExist){
-            admin.getRequestArrayList().add(new SignUpRequest(email, number, password));
-            return 0;
-        } else if (!(matcherEmail.find())) {
+
+        if (!(matcherEmail.find())) {
             return 1;
         } else if (!(matcherNumber.find())) {
             return 2;
@@ -45,8 +43,12 @@ public class BuyerController {
             return 3;
         } else if (!(emailNotExist)) {
             return 4;
+        } else if (!(numberNotExist)){
+            return 5;
+        } else {
+            admin.getRequestArrayList().add(new SignUpRequest(email, number, password));
+            return 0;
         }
-        return 5;
     }
 
     public boolean logIn (String idBuyer, String password){
