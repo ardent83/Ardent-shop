@@ -18,7 +18,7 @@ import model.for_user.Admin;
 import java.util.ArrayList;
 
 public class FilterController {
-     private Admin admin = Admin.getAdmin();
+     private final Admin admin = Admin.getAdmin();
     public ArrayList<Item> filterCategory(Category category){
         ArrayList<Item> items = new ArrayList<>();
         for (Item item : admin.getItemArrayList()){
@@ -168,28 +168,19 @@ public class FilterController {
         return items;
     }
     public ArrayList<Item> filterPrice(double firstRang, double lastRang , ArrayList<Item> items){
-        for (Item item : items){
-            if (item.getPrice() < firstRang || item.getPrice() > lastRang){
-                items.remove(item);
-            }
-        }
-        return items;
+        ArrayList<Item> itemsTemp = new ArrayList<>(items);
+        itemsTemp.removeIf(item -> item.getPrice() < firstRang || item.getPrice() > lastRang);
+        return itemsTemp;
     }
     public ArrayList<Item> filterScore(double firstRang, double lastRang , ArrayList<Item> items){
-        for (Item item : items) {
-            if (item.getAverageScore() < firstRang || item.getAverageScore() > lastRang){
-                items.remove(item);
-            }
-        }
-        return items;
+        ArrayList<Item> itemsTemp = new ArrayList<>(items);
+        itemsTemp.removeIf(item -> item.getAverageScore() < firstRang || item.getAverageScore() > lastRang);
+        return itemsTemp;
     }
     public ArrayList<Item> filterAvailableItem(ArrayList<Item> items){
-        for (Item item : items){
-            if (item.getAvailableNumber() == 0){
-                items.remove(item);
-            }
-        }
-        return items;
+        ArrayList<Item> itemsTemp = new ArrayList<>(items);
+        itemsTemp.removeIf(item -> item.getAvailableNumber() == 0);
+        return itemsTemp;
     }
     public ArrayList<Item> removeAllFilter(){
         return admin.getItemArrayList();

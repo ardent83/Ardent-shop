@@ -47,15 +47,17 @@ public class ItemPanel {
     }
     protected void viewItems(ArrayList<Item> items) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < items.size(); i++) {
-            stringBuilder.append("\nName : ").append(items.get(i).getName());
-            stringBuilder.append("\nItem ID : ").append(items.get(i).getIdItem());
-            stringBuilder.append("\nScore : ").append(items.get(i).getAverageScore());
-            if (items.get(i).getAvailableNumber() > 3) {
-                stringBuilder.append("\nPrice : ").append(items.get(i).getPrice());
-            } else if (items.get(i).getAvailableNumber() <= 3 && items.get(i).getAvailableNumber() > 0) {
-                stringBuilder.append("\nPrice : ").append(items.get(i).getPrice());
-                stringBuilder.append("\nOnly ").append(items.get(i).getAvailableNumber()).append(" left in stock");
+        for (Item item : items) {
+            stringBuilder.append("\nName : ").append(item.getName());
+            stringBuilder.append("\nItem ID : ").append(item.getIdItem());
+            stringBuilder.append("\nScore : ").append(item.getAverageScore());
+            if (item.getAvailableNumber() > 3) {
+                stringBuilder.append("\nPrice : ").append(item.getPrice());
+            } else if (item.getAvailableNumber() <= 3 && item.getAvailableNumber() > 0) {
+                stringBuilder.append("\nPrice : ").append(item.getPrice());
+                stringBuilder.append("\nOnly ").append(item.getAvailableNumber()).append(" left in stock!");
+            } else if (item.getAvailableNumber() == 0){
+                stringBuilder.append("\nNot available!");
             }
             stringBuilder.append("\n___________________________________");
         }

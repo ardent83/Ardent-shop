@@ -19,6 +19,8 @@ import model.for_user.request.IncreaseCreditRequest;
 import model.for_user.request.Request;
 import model.for_user.request.SignUpRequest;
 
+import java.util.ArrayList;
+
 public class AdminController {
     Admin admin = Admin.getAdmin();
     public void addSSD(String name, double price, int availableNumber, double weight, double volume, double capacity, double readSpeed, double writSpeed){
@@ -59,20 +61,23 @@ public class AdminController {
     }
 
     public boolean requestRejection1(String idRequest){
-        for (Request request : admin.getRequestArrayList()){
+        boolean check = false;
+        ArrayList<Request> requests = new ArrayList<>();
+        for (Request request : admin.getRequestArrayList()) {
             if (request.getIdRequest().equals(idRequest)){
                 if(request instanceof SignUpRequest){
-                    admin.getRequestArrayList().remove(request);
+                    requests.add(request);
                 } else if (request instanceof CommentRequest) {
                     ((CommentRequest) request).getComment().setCommentStatus(CommentStatus.FAILED);
-                    admin.getRequestArrayList().remove(request);
+                    requests.add(request);
                 } else if (request instanceof IncreaseCreditRequest){
-                    admin.getRequestArrayList().remove(request);
+                    requests.add(request);
                 }
-                return true;
+                check = true;
             }
         }
-        return false;
+        admin.getRequestArrayList().removeAll(requests);
+        return check;
     }
     public boolean editName(String idItem, String newName){
         for (Item item : admin.getItemArrayList()){
