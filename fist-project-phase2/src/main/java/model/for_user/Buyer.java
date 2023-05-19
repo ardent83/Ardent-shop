@@ -7,6 +7,7 @@ import model.for_item.Score;
 import model.for_user.request.CommentRequest;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 
 public class Buyer extends User {
@@ -21,6 +22,14 @@ public class Buyer extends User {
     private HashMap<Item,Integer> cart;
     private ArrayList<PurchaseInvoice> purchaseHistoryArrayList;
     private double accountCredit;
+    private ArrayList<Discount> discountCodes;
+
+    public ArrayList<Discount> getDiscountCodes() {
+        return discountCodes;
+    }
+    public void addDiscountCode(Discount discount) {
+        this.discountCodes.add(discount);
+    }
 
     public void setEmail(String email) {
         this.email = email;
