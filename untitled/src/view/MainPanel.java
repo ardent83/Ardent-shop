@@ -7,7 +7,7 @@ public class MainPanel {
         input = new Scanner(System.in);
     }
 
-    private Scanner input;
+    private final Scanner input;
     public void mainPanel() {
         System.out.println("Select Number :\n1.Sign Up \n2.Log in \n3.Item page ");
         int command = input.nextInt();

@@ -25,29 +25,29 @@ public class ItemPanelBuyer extends ItemPanel{
                         addItemToCartPanel(item, number);
                         return;
                     case 2:
-                        viewItems(admin.getItemArrayList());
+                        postAComment(idItem);
                         return;
                     case 3:
                         new BuyerPanel(buyer).buyerMenu();
                         return;
                     default:
                         System.out.println("command is wrong!");
-                        itemMenu();
+                        new BuyerPanel(buyer).buyerMenu();
                         return;
                 }
             }
         }
         System.out.println("\nThere is no item with this ID!");
-        itemMenu();
+        new BuyerPanel(buyer).buyerMenu();
     }
     private void addItemToCartPanel(Item item, int numberItem){
         if (buyerController.addItemToCart(buyer, item, numberItem)) {
             System.out.println("\nAdding the item to the cart was successful.");
-            itemMenu();
+            new BuyerPanel(buyer).buyerMenu();
             return;
         }
         System.out.println("\nThe number is more than the inventory.");
-        itemMenu();
+        new BuyerPanel(buyer).buyerMenu();
     }
 
     @Override
@@ -57,10 +57,10 @@ public class ItemPanelBuyer extends ItemPanel{
         String commentText = input.nextLine();
         if (buyer.postAComment(idItem, commentText)) {
             System.out.println("\nThe comment was sent successfully");
-            itemMenu();
+            new BuyerPanel(buyer).buyerMenu();
             return;
         }
         System.out.println("\nitem ID is wrong!");
-        itemMenu();
+        new BuyerPanel(buyer).buyerMenu();
     }
 }
