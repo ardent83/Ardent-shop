@@ -3,15 +3,16 @@ import model.for_item.Item;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class PurchaseInvoice {
-    public PurchaseInvoice(double amountPaid, ArrayList<Item> itemArrayList) {
+    public PurchaseInvoice(double amountPaid, HashMap<Item,Integer> itemArrayList) {
         this.idPurchaseInvoice = Integer.toHexString(countForId+61153);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date tempDate = new Date();
         this.date = formatter.format(tempDate);
         this.amountPaid = amountPaid;
-        this.itemArrayList = new ArrayList<>(itemArrayList);
+        this.itemArrayList = new HashMap<>(itemArrayList);
         countForId++;
     }
 
@@ -19,7 +20,7 @@ public class PurchaseInvoice {
     private final String idPurchaseInvoice;
     private final String date;
     private final double amountPaid;
-    private final ArrayList<Item> itemArrayList;
+    private final HashMap<Item,Integer> itemArrayList;
 
     public static int getCountForId() {
         return countForId;
@@ -37,7 +38,7 @@ public class PurchaseInvoice {
         return amountPaid;
     }
 
-    public ArrayList<Item> getItemArrayList() {
+    public HashMap<Item,Integer> getItemArrayList() {
         return itemArrayList;
     }
 
