@@ -5,8 +5,7 @@ import model.for_item.Item;
 import model.for_user.Buyer;
 import model.for_user.PurchaseInvoice;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class BuyerPanel {
     public BuyerPanel(Buyer buyer) {
@@ -104,27 +103,11 @@ public class BuyerPanel {
         }
     }
     private void viewCart() {
-        ArrayList<Item> items;
-        ArrayList<Integer> integers = new ArrayList<>();
-        items = buyer.getCart();
-        for (Item item : items){
-            int count = 0;
-            for (Item item1 : buyer.getCart()){
-                if (item.getIdItem().equals(item1.getIdItem()) && (count == 0)){
-                    count++;
-                }
-                if (item.getIdItem().equals(item1.getIdItem()) && (count > 0)){
-                    items.remove(item);
-                    count++;
-                }
-            }
-            integers.add(count);
-        }
-        for (int i = 0; i < items.size(); i++) {
-            System.out.println("\nname : " + items.get(i).getName() +
-                    "\nitem ID : " + items.get(i).getIdItem() +
-                    "\nprice : " + items.get(i).getPrice() +
-                    "\nquantity in cart : " + integers.get(i) +
+        for (Item item : buyer.getCart().keySet()){
+            System.out.println("\nname : " + item.getName() +
+                    "\nitem ID : " + item.getIdItem() +
+                    "\nprice : " + item.getIdItem() +
+                    "\nquantity in cart : " + buyer.getCart().get(item) +
                     "\n_____________________________________________________");
         }
         System.out.println("\nSelect Number :\n1.remove item \n2.back");
@@ -172,6 +155,7 @@ public class BuyerPanel {
         String CVV2 = input.next();
         if (buyerController.increaseCredit(buyer, amount, cardNumber, passwordCard, CVV2)){
             System.out.println("\nAccount credit request has been successfully sent.");
+            buyerMenu();
         } else {
             System.out.println("\nThe card information is invalid!");
             System.out.println("\nSelect Number :\n1.Increase account credit \n2.go to buyer menu");
@@ -192,27 +176,11 @@ public class BuyerPanel {
     }
     private void viewPurchaseHistory() {
         for (PurchaseInvoice purchaseInvoice : buyer.getPurchaseHistoryArrayList()){
-            ArrayList<Item> items;
-            ArrayList<Integer> integers = new ArrayList<>();
-            items = purchaseInvoice.getItemArrayList();
-            for (Item item : items){
-                int count = 0;
-                for (Item item1 : purchaseInvoice.getItemArrayList()){
-                    if (item.getIdItem().equals(item1.getIdItem()) && (count == 0)){
-                        count++;
-                    }
-                    if (item.getIdItem().equals(item1.getIdItem()) && (count > 0)){
-                        items.remove(item);
-                        count++;
-                    }
-                }
-                integers.add(count);
-            }
-            for (int i = 0; i < items.size(); i++) {
-                System.out.println("\nname : " + items.get(i).getName() +
-                        "\nitem ID : " + items.get(i).getIdItem() +
-                        "\nprice : " + items.get(i).getPrice() +
-                        "\nquantity purchased : " + integers.get(i) +
+            for (Item item : purchaseInvoice.getItemArrayList().keySet()){
+                System.out.println("\nname : " + item.getName() +
+                        "\nitem ID : " + item.getIdItem() +
+                        "\nprice : " + item.getPrice() +
+                        "\nquantity purchased : " + buyer.getCart().get(item) +
                         "\n_____________________________________________________");
             }
         }
@@ -244,10 +212,12 @@ public class BuyerPanel {
         System.out.println("\nEnter item ID and number.");
         String itemId = input.next();
         double number = input.nextDouble();
-        for (Item item : buyer.getCart()){
-            if (item.getIdItem().equals(itemId) && (number > 0)){
-                buyer.getCart().remove(item);
-                number--;
+        Iterator<Map.Entry<Item, Integer>> iterator = buyer.getCart().entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Item, Integer> entry = iterator.next();
+            if (entry.getKey().getIdItem().equals(itemId)) {
+                buyer.getCart().replace(entry.getKey(),(int) (entry.getValue()-number));
+                break;
             }
         }
         System.out.println("\nRemoved successfully.");
