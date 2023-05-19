@@ -82,12 +82,16 @@ public class Buyer extends User {
                 for (PurchaseInvoice purchaseInvoice : this.purchaseHistoryArrayList){
                     for (Item item1 : purchaseInvoice.getItemArrayList().keySet()){
                         if(item1.getIdItem().equals(idItem)){
-                            admin.getRequestArrayList().add(new CommentRequest(new Comment(this, item.getIdItem(), commentText, true)));
+                            Comment comment = new Comment(this, item.getIdItem(), commentText, true);
+                            item.getCommentArrayList().add(comment);
+                            admin.getRequestArrayList().add(new CommentRequest(comment));
                             return true;
                         }
                     }
                 }
-                admin.getRequestArrayList().add(new CommentRequest(new Comment(this, item.getIdItem(), commentText, false)));
+                Comment comment = new Comment(this, item.getIdItem(), commentText, true);
+                item.getCommentArrayList().add(comment);
+                admin.getRequestArrayList().add(new CommentRequest(comment));
                 return true;
             }
         }

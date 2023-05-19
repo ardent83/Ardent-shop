@@ -116,7 +116,8 @@ public class ItemPanel {
             viewItems(buyerController.searchItem(nameItem));
         }
     }
-    protected void filterItem(ArrayList<Item> items) {
+    protected void filterItem(ArrayList<Item> items1) {
+        ArrayList<Item> items = new ArrayList<>(items1);
         System.out.println("Select Number :\n1.General features \n2.Category");
         int command = input.nextInt();
         switch (command) {
@@ -192,7 +193,7 @@ public class ItemPanel {
                                     itemMenu();
                                     return;
                                 }
-                                viewItems(filterController.filterSubCategory(SubCategory.SSD));
+                                viewItems(filterController.filterCategory(Category.DIGITAL));
                                 break;
                             default:
                                 System.out.println("\ncommand is wrong!");
@@ -318,7 +319,9 @@ public class ItemPanel {
         String commentText = input.nextLine();
         for (Item item : admin.getItemArrayList()) {
             if (item.getIdItem().equals(idItem)) {
-                admin.getRequestArrayList().add(new CommentRequest(new Comment(admin, item.getIdItem(), commentText, false)));
+                Comment comment = new Comment(admin, item.getIdItem(), commentText, false);
+                item.getCommentArrayList().add(comment);
+                admin.getRequestArrayList().add(new CommentRequest(comment));
                 System.out.println("\nThe comment was sent successfully");
                 itemMenu();
                 return;
