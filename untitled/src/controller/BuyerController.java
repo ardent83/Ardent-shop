@@ -141,38 +141,33 @@ public class BuyerController {
     }
     public boolean addItemToCart(Buyer buyer, Item item, int number){
         if (item.getAvailableNumber() >= number){
-            for (int i = 0; i < number; i++) {
-                buyer.getCart().add(item);
-            }
+            buyer.getCart().put(item,number);
             return true;
         }
         return false;
     }
     public boolean finalizeCart(Buyer buyer){
         double amount = 0;
-        for (Item item : buyer.getCart()){
+        for (Item item : buyer.getCart().keySet()){
             amount += item.getPrice();
         }
         if (amount <= buyer.getAccountCredit()){
             buyer.setAccountCredit(buyer.getAccountCredit()-amount);
-            for (Item item : buyer.getCart()){
+            for (Item item : buyer.getCart().keySet()){
                 item.setAvailableNumber(item.getAvailableNumber()-1);
+//               بروزرسانی سبد خرید دیگران
                 for (Buyer buyer1 : admin.getBuyerArrayList()){
                     if (!(buyer1.getId().equals(buyer.getId()))){
-                        int count = 0;
-                        for (Item item1 : buyer1.getCart()){
-                            if (item1.getIdItem().equals(item.getIdItem())){
-                                count++;
+                        if (buyer.getCart().containsKey(item)){
+                            if (buyer.getCart().get(item) > item.getAvailableNumber()){
+                                buyer.getCart().replace(item,item.getAvailableNumber());
                             }
-                        }
-                        if (count > item.getAvailableNumber()){
-                            buyer1.getCart().remove(item);
                         }
                     }
                 }
             }
             buyer.getPurchaseHistoryArrayList().add(new PurchaseInvoice(amount, buyer.getCart()));
-            buyer.getCart().removeAll(buyer.getCart());
+            buyer.getCart().clear();
             return true;
         }
         return false;
