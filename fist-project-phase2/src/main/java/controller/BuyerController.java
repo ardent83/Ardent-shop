@@ -3,10 +3,12 @@ package controller;
 import model.for_item.Item;
 import model.for_user.Admin;
 import model.for_user.Buyer;
+import model.for_user.Discount;
 import model.for_user.PurchaseInvoice;
 import model.for_user.request.IncreaseCreditRequest;
 import model.for_user.request.SignUpRequest;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -146,21 +148,56 @@ public class BuyerController {
         }
         return false;
     }
+    public boolean finalizeCart(Buyer buyer, String discountCode) {
+        double amount = 0;
+        for (Item item : buyer.getCart().keySet()) {
+            amount += item.getPrice();
+        }
+        for (Discount discount : buyer.getDiscountCodes()) {
+            if (discount.getDiscountCode().equals(discountCode)) {
+                if (discount.getCapacity() == 0 || discount.getDiscountValidity().isBefore(LocalDate.now())){
+                    throw new RuntimeException();
+                }
+                discount.setCapacity(discount.getCapacity()-1);
+                amount = (amount * (discount.getDiscountPercent() / 100));
+                if (amount <= buyer.getAccountCredit()) {
+                    for (Item item : buyer.getCart().keySet()) {
+                        item.setAvailableNumber(item.getAvailableNumber() - buyer.getCart().get(item));
+//                      بروزرسانی سبد خرید دیگران
+                        for (Buyer buyer1 : admin.getBuyerArrayList()) {
+                            if (!(buyer1.getId().equals(buyer.getId()))) {
+                                if (buyer1.getCart().containsKey(item)) {
+                                    if (buyer1.getCart().get(item) > item.getAvailableNumber()) {
+                                        buyer1.getCart().replace(item, item.getAvailableNumber());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    buyer.getPurchaseHistoryArrayList().add(new PurchaseInvoice(amount, buyer.getCart()));
+                    buyer.getCart().clear();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        throw new RuntimeException();
+    }
     public boolean finalizeCart(Buyer buyer){
         double amount = 0;
         for (Item item : buyer.getCart().keySet()){
             amount += item.getPrice();
         }
         if (amount <= buyer.getAccountCredit()){
-            buyer.setAccountCredit(buyer.getAccountCredit()-amount);
             for (Item item : buyer.getCart().keySet()){
-                item.setAvailableNumber(item.getAvailableNumber()-1);
+                item.setAvailableNumber(item.getAvailableNumber()-buyer.getCart().get(item));
 //               بروزرسانی سبد خرید دیگران
                 for (Buyer buyer1 : admin.getBuyerArrayList()){
                     if (!(buyer1.getId().equals(buyer.getId()))){
-                        if (buyer.getCart().containsKey(item)){
-                            if (buyer.getCart().get(item) > item.getAvailableNumber()){
-                                buyer.getCart().replace(item,item.getAvailableNumber());
+                        if (buyer1.getCart().containsKey(item)){
+                            if (buyer1.getCart().get(item) > item.getAvailableNumber()){
+                                buyer1.getCart().replace(item,item.getAvailableNumber());
                             }
                         }
                     }
