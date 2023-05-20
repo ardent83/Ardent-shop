@@ -1,9 +1,9 @@
 package model.for_user;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Discount {
-    public Discount(double discountPercent, Date discountValidity, int capacity) {
+    public Discount(double discountPercent, LocalDate discountValidity, int capacity) {
         this.discountPercent = discountPercent;
         this.discountValidity = discountValidity;
         this.capacity = capacity;
@@ -11,7 +11,7 @@ public class Discount {
     }
 
     private double discountPercent;
-    private Date discountValidity;
+    private LocalDate discountValidity;
     private int capacity;
     private final String discountCode;
 
@@ -23,11 +23,11 @@ public class Discount {
         this.discountPercent = discountPercent;
     }
 
-    public Date getDiscountValidity() {
+    public LocalDate getDiscountValidity() {
         return discountValidity;
     }
 
-    public void setDiscountValidity(Date discountValidity) {
+    public void setDiscountValidity(LocalDate discountValidity) {
         this.discountValidity = discountValidity;
     }
 
