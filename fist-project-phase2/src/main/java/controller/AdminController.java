@@ -2,6 +2,7 @@ package controller;
 
 import model.for_item.CommentStatus;
 import model.for_item.Item;
+import model.for_item.child_item_digital.DigitalItem;
 import model.for_item.child_item_digital.Pc;
 import model.for_item.child_item_digital.Ssd;
 import model.for_item.child_item_digital.Usb;
@@ -126,5 +127,33 @@ public class AdminController {
                 buyer.addDiscountCode(new Discount(40, LocalDate.now().plusDays(15), 2));
             }
         }
+    }
+    public boolean addDiscountToItem(String idItem, double discountPercent){
+        for (Item item : admin.getItemArrayList()){
+            if (item.getIdItem().equals(idItem)){
+                if (item instanceof DigitalItem){
+                    ((DigitalItem) item).addDiscount(20);
+                    return true;
+                } else if (item instanceof Pen){
+                    ((Pen) item).addDiscount(30);
+                    return true;
+                } else if (item instanceof Pencil){
+                    ((Pencil) item).addDiscount(25);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean removeDiscountOfItem(String idItem){
+        for (Item item : admin.getItemArrayList()){
+            if (item.getIdItem().equals(idItem)){
+                if (item instanceof DigitalItem || item instanceof Pen || item instanceof Pencil){
+                    ((model.for_item.Discount) item).removeDiscount();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
