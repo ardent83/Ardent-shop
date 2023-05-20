@@ -14,11 +14,14 @@ import model.for_item.child_item_vehicles.Bike;
 import model.for_item.child_item_vehicles.BikeType;
 import model.for_item.child_item_vehicles.Car;
 import model.for_user.Admin;
+import model.for_user.Buyer;
+import model.for_user.Discount;
 import model.for_user.request.CommentRequest;
 import model.for_user.request.IncreaseCreditRequest;
 import model.for_user.request.Request;
 import model.for_user.request.SignUpRequest;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AdminController {
@@ -105,5 +108,23 @@ public class AdminController {
             }
         }
         return false;
+    }
+    public void GiveDiscountCode() {
+        int max = 0;
+        String idMax = "";
+        for (Buyer buyer : admin.getBuyerArrayList()){
+            if (buyer.getPurchaseHistoryArrayList().size() == 0){
+                buyer.addDiscountCode(new Discount(30, LocalDate.now().plusDays(7),1));
+            }
+            if (max < buyer.getPurchaseHistoryArrayList().size()){
+                max = buyer.getPurchaseHistoryArrayList().size();
+                idMax = buyer.getId();
+            }
+        }
+        for (Buyer buyer : admin.getBuyerArrayList()){
+            if (buyer.getId().equals(idMax)){
+                buyer.addDiscountCode(new Discount(40, LocalDate.now().plusDays(15), 2));
+            }
+        }
     }
 }
