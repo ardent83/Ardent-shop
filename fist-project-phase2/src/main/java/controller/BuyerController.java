@@ -1,7 +1,6 @@
 package controller;
 
-import exceptions.DiscountException;
-import exceptions.LackOfMoney;
+import exceptions.*;
 import model.for_item.Item;
 import model.for_user.Admin;
 import model.for_user.Buyer;
@@ -17,7 +16,16 @@ import java.util.regex.Pattern;
 
 public class BuyerController {
     Admin admin = Admin.getAdmin();
-    public int register(String email, String number, String password){
+    public void register(String email, String number, String password) throws Exception {
+        for (Buyer buyer : admin.getBuyerArrayList()){
+            if (buyer.getEmail().equals(email)){
+                throw new AvailableEmailException();
+            }
+            if (buyer.getNumber().equals(number)){
+                throw new AvailableNumberException();
+            }
+        }
+
         Pattern patternEmail = Pattern.compile("^\\w+@(gmail|yahoo)\\.com$");
         Matcher matcherEmail = patternEmail.matcher(email);
 
@@ -27,41 +35,24 @@ public class BuyerController {
         Pattern patternPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$");
         Matcher matcherPassword = patternPassword.matcher(password);
 
-        boolean emailNotExist = true;
-        boolean numberNotExist = true;
-        for (Buyer buyer : admin.getBuyerArrayList()){
-            if (buyer.getEmail().equals(email)){
-                emailNotExist = false;
-            }
-            if (buyer.getNumber().equals(number)){
-                numberNotExist = false;
-            }
-        }
-
-
         if (!(matcherEmail.find())) {
-            return 1;
+            throw new EmailException();
         } else if (!(matcherNumber.find())) {
-            return 2;
+            throw new NumberPhoneException();
         } else if (!(matcherPassword.find())) {
-            return 3;
-        } else if (!(emailNotExist)) {
-            return 4;
-        } else if (!(numberNotExist)){
-            return 5;
+             throw new PasswordException();
         } else {
             admin.getRequestArrayList().add(new SignUpRequest(email, number, password));
-            return 0;
         }
     }
 
-    public boolean logIn (String idBuyer, String password){
+    public void logIn (String idBuyer, String password) throws Exception{
         for (Buyer buyer : admin.getBuyerArrayList()){
             if (buyer.getId().equals(idBuyer) && buyer.getPassword().equals(password)){
-                return true;
+                return;
             }
         }
-        return false;
+        throw new InputException("username or password is invalid!");
     }
     public Buyer getBuyer(String idBuyer){
         for (Buyer buyer : admin.getBuyerArrayList()){
@@ -71,54 +62,53 @@ public class BuyerController {
         }
         return new Buyer("null","null","null");
     }
-    public int editEmail(Buyer buyer, String email){
+    public void editEmail(Buyer buyer, String email) throws Exception {
+        for (Buyer buyer1 : admin.getBuyerArrayList()){
+            if (buyer1.getEmail().equals(email)){
+                throw new AvailableEmailException();
+            }
+        }
+
         Pattern patternEmail = Pattern.compile("^\\w+@(gmail|yahoo)\\.com$");
         Matcher matcherEmail = patternEmail.matcher(email);
 
-        boolean emailNotExist = true;
+        if (matcherEmail.find()){
+            buyer.setEmail(email);
+            return;
+        }
+        throw new EmailException();
+    }
+    public void editNumber(Buyer buyer, String number) throws Exception {
         for (Buyer buyer1 : admin.getBuyerArrayList()){
-            if (buyer1.getEmail().equals(email)){
-                emailNotExist = false;
+            if (buyer1.getNumber().equals(number)){
+                throw new AvailableNumberException();
             }
         }
 
-        if (matcherEmail.find() && emailNotExist){
-            buyer.setEmail(email);
-            return 0;
-        }else if (!(matcherEmail.find())){
-            return 1;
-        }
-        return 2;
-    }
-    public int editNumber(Buyer buyer, String number){
         Pattern patternNumber = Pattern.compile("\\d{11}");
         Matcher matcherNumber = patternNumber.matcher(number);
 
-        boolean numberNotExist = true;
-        for (Buyer buyer1 : admin.getBuyerArrayList()){
-            if (buyer1.getNumber().equals(number)){
-                numberNotExist = false;
-            }
+        if (matcherNumber.find()){
+            buyer.setNumber(number);
+            return;
+        }
+        throw new NumberPhoneException();
+    }
+    public void editPassword(Buyer buyer, String password) throws Exception {
+        if (buyer.getPassword().equals(password)){
+            throw new AvailablePasswordException();
         }
 
-        if (matcherNumber.find() && numberNotExist){
-            buyer.setNumber(number);
-            return 0;
-        } else if (!(matcherNumber.find())) {
-            return 1;
-        }
-        return 2;
-    }
-    public boolean editPassword(Buyer buyer, String password){
         Pattern patternPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$");
         Matcher matcherPassword = patternPassword.matcher(password);
+
         if (matcherPassword.find()){
             buyer.setPassword(password);
-            return true;
+            return;
         }
-        return false;
+        throw  new PasswordException();
     }
-    public boolean increaseCredit(Buyer buyer, double amount,String cardNumber, String passwordCard, String CVV2){
+    public void increaseCredit(Buyer buyer, double amount,String cardNumber, String passwordCard, String CVV2) throws Exception{
         Pattern patternNumber = Pattern.compile("\\d{16}");
         Matcher matcherNumber = patternNumber.matcher(cardNumber);
 
@@ -130,25 +120,25 @@ public class BuyerController {
 
         if (matcherNumber.find() && matcherPassword.find() && matcherCVV2.find()){
             admin.getRequestArrayList().add(new IncreaseCreditRequest(buyer, amount));
-            return true;
+            return;
         }
-        return false;
+        throw new CardException();
     }
     public ArrayList<Item> searchItem(String nameItem){
         ArrayList<Item> searchResults = new ArrayList<>();
         for (Item item : admin.getItemArrayList()){
-            if ((item.getName()).equalsIgnoreCase((nameItem))){
+            if ((item.getName()).toUpperCase().contains((nameItem.toUpperCase()))){
                 searchResults.add(item);
             }
         }
         return searchResults;
     }
-    public boolean addItemToCart(Buyer buyer, Item item, int number){
+    public void addItemToCart(Buyer buyer, Item item, int number) throws Exception{
         if (item.getAvailableNumber() >= number){
             buyer.getCart().put(item,number);
-            return true;
+            return;
         }
-        return false;
+        throw new ItemOutOfStockException();
     }
     public void finalizeCart(Buyer buyer, ArrayList<String> discountCodes) throws Exception {
         double amount = 0;
@@ -182,7 +172,6 @@ public class BuyerController {
         double discountPercentCart = 0;
         for (Discount discount : discountCart){
             discountPercentCart += discount.getDiscountPercent();
-            discount.setCapacity(discount.getCapacity() - 1);
         }
 
         if (discountPercentCart > 90){
@@ -191,6 +180,9 @@ public class BuyerController {
 
         amount = (amount * ((100 - discountPercentCart) / 100));
         if (amount <= buyer.getAccountCredit()) {
+            for (Discount discount : discountCart){
+                discount.setCapacity(discount.getCapacity() - 1);
+            }
             for (Item item : buyer.getCart().keySet()) {
                 item.setAvailableNumber(item.getAvailableNumber() - buyer.getCart().get(item));
 //              بروزرسانی سبد خرید دیگران
@@ -209,30 +201,5 @@ public class BuyerController {
         } else {
             throw new LackOfMoney();
         }
-    }
-    public boolean finalizeCart(Buyer buyer){
-        double amount = 0;
-        for (Item item : buyer.getCart().keySet()){
-            amount += (item.getPrice() * buyer.getCart().get(item));
-        }
-        if (amount <= buyer.getAccountCredit()){
-            for (Item item : buyer.getCart().keySet()){
-                item.setAvailableNumber(item.getAvailableNumber()-buyer.getCart().get(item));
-//              بروزرسانی سبد خرید دیگران
-                for (Buyer buyer1 : admin.getBuyerArrayList()){
-                    if (!(buyer1.getId().equals(buyer.getId()))){
-                        if (buyer1.getCart().containsKey(item)){
-                            if (buyer1.getCart().get(item) > item.getAvailableNumber()){
-                                buyer1.getCart().replace(item,item.getAvailableNumber());
-                            }
-                        }
-                    }
-                }
-            }
-            buyer.getPurchaseHistoryArrayList().add(new PurchaseInvoice(amount, buyer.getCart()));
-            buyer.getCart().clear();
-            return true;
-        }
-        return false;
     }
 }

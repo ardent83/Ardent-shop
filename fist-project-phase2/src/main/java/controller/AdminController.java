@@ -1,5 +1,6 @@
 package controller;
 
+import exceptions.InputException;
 import model.for_item.CommentStatus;
 import model.for_item.Item;
 import model.for_item.child_item_digital.DigitalItem;
@@ -54,17 +55,17 @@ public class AdminController {
     public void addCar(String name, double price, int availableNumber, String companyName, double engineVolume, boolean automatic){
         admin.getItemArrayList().add(new Car(name, price, availableNumber, companyName, engineVolume, automatic));
     }
-    public boolean acceptRequest1(String idRequest){
+    public void acceptRequest1(String idRequest) throws Exception{
         for (Request request : admin.getRequestArrayList()){
             if (request.getIdRequest().equals(idRequest)){
                 admin.acceptRequest(request);
-                return true;
+                return;
             }
         }
-        return false;
+        throw new InputException("ID is invalid!");
     }
 
-    public boolean requestRejection1(String idRequest){
+    public void requestRejection1(String idRequest) throws Exception {
         boolean check = false;
         ArrayList<Request> requests = new ArrayList<>();
         for (Request request : admin.getRequestArrayList()) {
@@ -80,35 +81,38 @@ public class AdminController {
                 check = true;
             }
         }
-        admin.getRequestArrayList().removeAll(requests);
-        return check;
+        if (check){
+            admin.getRequestArrayList().removeAll(requests);
+            return;
+        }
+        throw new InputException("ID is invalid!");
     }
-    public boolean editName(String idItem, String newName){
+    public void editName(String idItem, String newName) throws Exception {
         for (Item item : admin.getItemArrayList()){
             if (item.getIdItem().equals(idItem)){
                 admin.editNameItem(item, newName);
-                return true;
+                return;
             }
         }
-        return false;
+        throw new InputException("ID is invalid!");
     }
-    public boolean editPrice(String idItem, double newPrice){
+    public void editPrice(String idItem, double newPrice) throws Exception {
         for (Item item : admin.getItemArrayList()){
             if (item.getIdItem().equals(idItem)){
                 admin.editPriceItem(item, newPrice);
-                return true;
+                return;
             }
         }
-        return false;
+        throw new InputException("ID is invalid!");
     }
-    public boolean editAvailableNumber1(String idItem, int newAvailableNumber){
+    public void editAvailableNumber1(String idItem, int newAvailableNumber) throws Exception {
         for (Item item : admin.getItemArrayList()){
             if (item.getIdItem().equals(idItem)){
                 admin.editAvailableNumber(item, newAvailableNumber);
-                return true;
+                return;
             }
         }
-        return false;
+        throw new InputException("ID is invalid!");
     }
     public void GiveDiscountCode() {
         int max = 0;
@@ -128,32 +132,32 @@ public class AdminController {
             }
         }
     }
-    public boolean addDiscountToItem(String idItem, double discountPercent){
+    public void addDiscountToItem(String idItem) throws Exception {
         for (Item item : admin.getItemArrayList()){
             if (item.getIdItem().equals(idItem)){
                 if (item instanceof DigitalItem){
                     ((DigitalItem) item).addDiscount(20);
-                    return true;
+                    return;
                 } else if (item instanceof Pen){
                     ((Pen) item).addDiscount(30);
-                    return true;
+                    return;
                 } else if (item instanceof Pencil){
                     ((Pencil) item).addDiscount(25);
-                    return true;
+                    return;
                 }
             }
         }
-        return false;
+        throw new InputException("ID is invalid!");
     }
-    public boolean removeDiscountOfItem(String idItem){
+    public void removeDiscountOfItem(String idItem) throws Exception{
         for (Item item : admin.getItemArrayList()){
             if (item.getIdItem().equals(idItem)){
                 if (item instanceof DigitalItem || item instanceof Pen || item instanceof Pencil){
                     ((model.for_item.Discount) item).removeDiscount();
-                    return true;
+                    return;
                 }
             }
         }
-        return false;
+        throw new InputException("ID is invalid!");
     }
 }

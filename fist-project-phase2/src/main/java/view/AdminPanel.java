@@ -19,94 +19,81 @@ public class AdminPanel {
     public final Admin admin = Admin.getAdmin();
     private final AdminController adminController;
     public void adminMenu(){
-        System.out.println("\nA:\\Users\\Admin>");
+        System.out.print("\nA:\\Users\\Admin> ");
         String command = input.nextLine();
         String[] splited = command.split("\\s+");
         switch (splited[0]) {
-            case "back":
-                new MainPanel().mainPanel();
-                break;
-            case "viewRequest":
-                viewRequest();
-                break;
-            case "viewUser":
-                viewUser();
-                break;
-            case "add":
-                add(splited);
-                break;
-            case "remove":
-                remove(splited);
-                break;
-            case "edit" :
-                edit(splited);
-                break;
-            case "accept" :
-                accept(splited);
-                break;
-            case "rejection" :
-                rejection(splited);
-                break;
-            case "help":
-                help();
-                break;
-            default:
+            case "viewRequest" -> viewRequest();
+            case "viewUser" -> viewUser();
+            case "add" -> add(splited);
+            case "remove" -> remove(splited);
+            case "edit" -> edit(splited);
+            case "accept" -> accept(splited);
+            case "rejection" -> rejection(splited);
+            case "help" -> help();
+            default -> {
                 System.out.println("\ncommand is wrong!");
                 adminMenu();
-                break;
+            }
         }
     }
     private void add(String[] splited){
-        switch (splited[1]) {
-            case "PC" :
-                adminController.addPC(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), Double.parseDouble(splited[5]), Double.parseDouble(splited[6]), splited[7], Double.parseDouble(splited[8]));
-                System.out.println("\nAdded successfully.");
-                adminMenu();
-                break;
-            case "SSD":
-                adminController.addSSD(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), Double.parseDouble(splited[5]), Double.parseDouble(splited[6]), Double.parseDouble(splited[7]), Double.parseDouble(splited[8]), Double.parseDouble(splited[9]));
-                System.out.println("\nAdded successfully.");
-                adminMenu();
-                break;
-            case "USB":
-                adminController.addUSB(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), Double.parseDouble(splited[5]), Double.parseDouble(splited[6]), Double.parseDouble(splited[7]), Double.parseDouble(splited[8]));
-                System.out.println("\nAdded successfully.");
-                adminMenu();
-                break;
-            case "Food":
-                adminController.addFood(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], splited[6]);
-                System.out.println("\nAdded successfully.");
-                adminMenu();
-                break;
-            case "Notebook":
-                adminController.addNoteBook(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], Integer.parseInt(splited[6]), splited[7]);
-                System.out.println("\nAdded successfully.");
-                adminMenu();
-                break;
-            case "Pen":
-                adminController.addPen(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], splited[6]);
-                System.out.println("\nAdded successfully.");
-                adminMenu();
-                break;
-            case "Pencil":
-                adminController.addPencil(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], PencilType.valueOf(splited[6]));
-                System.out.println("\nAdded successfully.");
-                adminMenu();
-                break;
-            case "Bike":
-                adminController.addBike(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], BikeType.valueOf(splited[6]));
-                System.out.println("\nAdded successfully.");
-                adminMenu();
-                break;
-            case "Car" :
-                adminController.addCar(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], Double.parseDouble(splited[6]), Boolean.parseBoolean(splited[7]));
-                System.out.println("\nAdded successfully.");
-                adminMenu();
-                break;
-            default:
-                System.out.println("\ncommand is wrong!");
-                adminMenu();
-                break;
+        try {
+            switch (splited[1]) {
+                case "PC" -> {
+                    adminController.addPC(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), Double.parseDouble(splited[5]), Double.parseDouble(splited[6]), splited[7], Double.parseDouble(splited[8]));
+                    System.out.println("\nAdded successfully.");
+                    adminMenu();
+                }
+                case "SSD" -> {
+                    adminController.addSSD(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), Double.parseDouble(splited[5]), Double.parseDouble(splited[6]), Double.parseDouble(splited[7]), Double.parseDouble(splited[8]), Double.parseDouble(splited[9]));
+                    System.out.println("\nAdded successfully.");
+                    adminMenu();
+                }
+                case "USB" -> {
+                    adminController.addUSB(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), Double.parseDouble(splited[5]), Double.parseDouble(splited[6]), Double.parseDouble(splited[7]), Double.parseDouble(splited[8]));
+                    System.out.println("\nAdded successfully.");
+                    adminMenu();
+                }
+                case "Food" -> {
+                    adminController.addFood(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], splited[6]);
+                    System.out.println("\nAdded successfully.");
+                    adminMenu();
+                }
+                case "Notebook" -> {
+                    adminController.addNoteBook(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], Integer.parseInt(splited[6]), splited[7]);
+                    System.out.println("\nAdded successfully.");
+                    adminMenu();
+                }
+                case "Pen" -> {
+                    adminController.addPen(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], splited[6]);
+                    System.out.println("\nAdded successfully.");
+                    adminMenu();
+                }
+                case "Pencil" -> {
+                    adminController.addPencil(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], PencilType.valueOf(splited[6]));
+                    System.out.println("\nAdded successfully.");
+                    adminMenu();
+                }
+                case "Bike" -> {
+                    adminController.addBike(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], BikeType.valueOf(splited[6]));
+                    System.out.println("\nAdded successfully.");
+                    adminMenu();
+                }
+                case "Car" -> {
+                    adminController.addCar(splited[2], Double.parseDouble(splited[3]), Integer.parseInt(splited[4]), splited[5], Double.parseDouble(splited[6]), Boolean.parseBoolean(splited[7]));
+                    System.out.println("\nAdded successfully.");
+                    adminMenu();
+                }
+                default -> {
+                    System.out.println("\ncommand is wrong!");
+                    adminMenu();
+                }
+            }
+        }
+        catch (Exception e){
+            System.out.println("Exception " + e.getMessage());
+            adminMenu();
         }
     }
 
@@ -124,52 +111,56 @@ public class AdminPanel {
     }
 
     private void edit(String[] splited) {
-        switch (splited[1]) {
-            case "name":
-                if(adminController.editName(splited[2], splited[3])){
+        try {
+            switch (splited[1]) {
+                case "name" -> {
+                    adminController.editName(splited[2], splited[3]);
                     System.out.println("\nEdit was done successfully");
                     adminMenu();
-                    return;
                 }
-                System.out.println("\nInvalid ID!");
-                adminMenu();
-            case "price":
-                if (adminController.editPrice(splited[2], Double.parseDouble(splited[3]))){
+                case "price" -> {
+                    adminController.editPrice(splited[2], Double.parseDouble(splited[3]));
                     System.out.println("\nEdit was done successfully");
                     adminMenu();
-                    return;
                 }
-                System.out.println("\nInvalid ID!");
-                adminMenu();
-            case "availableNumber":
-                if (adminController.editAvailableNumber1(splited[2], Integer.parseInt(splited[0]))){
+                case "availableNumber" -> {
+                    adminController.editAvailableNumber1(splited[2], Integer.parseInt(splited[0]));
                     System.out.println("\nEdit was done successfully");
                     adminMenu();
-                    return;
                 }
-                System.out.println("\nInvalid ID!");
-                adminMenu();
+                default -> {
+                    System.out.println("\ncommand is wrong!");
+                    adminMenu();
+                }
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            adminMenu();
         }
     }
 
     private void accept(String[] splited){
-        if (adminController.acceptRequest1(splited[1])){
+        try {
+            adminController.acceptRequest1(splited[1]);
             System.out.println("\nThe request was successfully accepted.");
             adminMenu();
-            return;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            adminMenu();
         }
-        System.out.println("\nInvalid ID!");
-        adminMenu();
     }
 
     private void rejection(String[] splited){
-        if (adminController.requestRejection1(splited[1])){
+        try {
+            adminController.requestRejection1(splited[1]);
             System.out.println("\nThe request was successfully rejection.");
             adminMenu();
-            return;
         }
-        System.out.println("\nInvalid ID!");
-        adminMenu();
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            adminMenu();
+        }
     }
 
     private void viewRequest(){
@@ -205,7 +196,6 @@ public class AdminPanel {
         System.out.println("edit availableNumber itemID newAvailableNumber");
         System.out.println("accept idRequest");
         System.out.println("rejection idRequest");
-        System.out.println("back");
         System.out.println("\n_________________________________________________________________________");
         adminMenu();
     }
