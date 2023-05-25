@@ -1,12 +1,14 @@
 package view;
 
+import UI.MainPanel;
 import controller.AdminController;
-import model.for_item.Item;
-import model.for_item.child_item_stationary.PencilType;
-import model.for_item.child_item_vehicles.BikeType;
-import model.for_user.Admin;
-import model.for_user.Buyer;
-import model.for_user.request.Request;
+import javafx.stage.Stage;
+import model.item.Item;
+import model.item.stationary.PencilType;
+import model.item.vehicles.BikeType;
+import model.user.Admin;
+import model.user.Buyer;
+import model.user.request.Request;
 
 import java.util.Scanner;
 
@@ -18,7 +20,7 @@ public class AdminPanel {
     private final Scanner input;
     public final Admin admin = Admin.getAdmin();
     private final AdminController adminController;
-    public void adminMenu(){
+    public void adminMenu() {
         System.out.print("\nA:\\Users\\Admin> ");
         String command = input.nextLine();
         String[] splited = command.split("\\s+");
@@ -31,13 +33,14 @@ public class AdminPanel {
             case "accept" -> accept(splited);
             case "rejection" -> rejection(splited);
             case "help" -> help();
+            case "back" -> new MainPanel().start(new Stage());
             default -> {
                 System.out.println("\ncommand is wrong!");
                 adminMenu();
             }
         }
     }
-    private void add(String[] splited){
+    private void add(String[] splited) {
         try {
             switch (splited[1]) {
                 case "PC" -> {
@@ -97,7 +100,7 @@ public class AdminPanel {
         }
     }
 
-    private void remove(String[] splited){
+    private void remove(String[] splited) {
         for (Item item : admin.getItemArrayList()){
             if (item.getIdItem().equals(splited[1])){
                 admin.getItemArrayList().remove(item);
@@ -140,7 +143,7 @@ public class AdminPanel {
         }
     }
 
-    private void accept(String[] splited){
+    private void accept(String[] splited) {
         try {
             adminController.acceptRequest1(splited[1]);
             System.out.println("\nThe request was successfully accepted.");
@@ -151,7 +154,7 @@ public class AdminPanel {
         }
     }
 
-    private void rejection(String[] splited){
+    private void rejection(String[] splited) {
         try {
             adminController.requestRejection1(splited[1]);
             System.out.println("\nThe request was successfully rejection.");
@@ -163,7 +166,7 @@ public class AdminPanel {
         }
     }
 
-    private void viewRequest(){
+    private void viewRequest() {
         for (Request request : admin.getRequestArrayList()){
             System.out.println(request.toString());
             System.out.println("\n_______________________________________");
@@ -171,7 +174,7 @@ public class AdminPanel {
         adminMenu();
     }
 
-    private void viewUser(){
+    private void viewUser() {
         for (Buyer buyer : admin.getBuyerArrayList()){
             System.out.println(buyer.toString());
             System.out.println("\n_______________________________________");
@@ -196,6 +199,7 @@ public class AdminPanel {
         System.out.println("edit availableNumber itemID newAvailableNumber");
         System.out.println("accept idRequest");
         System.out.println("rejection idRequest");
+        System.out.println("back");
         System.out.println("\n_________________________________________________________________________");
         adminMenu();
     }

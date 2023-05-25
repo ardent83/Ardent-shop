@@ -1,13 +1,13 @@
 package controller;
 
 import exceptions.*;
-import model.for_item.Item;
-import model.for_user.Admin;
-import model.for_user.Buyer;
-import model.for_user.Discount;
-import model.for_user.PurchaseInvoice;
-import model.for_user.request.IncreaseCreditRequest;
-import model.for_user.request.SignUpRequest;
+import model.item.Item;
+import model.user.Admin;
+import model.user.Buyer;
+import model.user.Discount;
+import model.user.PurchaseInvoice;
+import model.user.request.IncreaseCreditRequest;
+import model.user.request.SignUpRequest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

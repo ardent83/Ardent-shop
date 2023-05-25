@@ -1,27 +1,27 @@
 package controller;
 
 import exceptions.InputException;
-import model.for_item.CommentStatus;
-import model.for_item.Item;
-import model.for_item.child_item_digital.DigitalItem;
-import model.for_item.child_item_digital.Pc;
-import model.for_item.child_item_digital.Ssd;
-import model.for_item.child_item_digital.Usb;
-import model.for_item.child_item_food.Food;
-import model.for_item.child_item_stationary.NoteBook;
-import model.for_item.child_item_stationary.Pen;
-import model.for_item.child_item_stationary.Pencil;
-import model.for_item.child_item_stationary.PencilType;
-import model.for_item.child_item_vehicles.Bike;
-import model.for_item.child_item_vehicles.BikeType;
-import model.for_item.child_item_vehicles.Car;
-import model.for_user.Admin;
-import model.for_user.Buyer;
-import model.for_user.Discount;
-import model.for_user.request.CommentRequest;
-import model.for_user.request.IncreaseCreditRequest;
-import model.for_user.request.Request;
-import model.for_user.request.SignUpRequest;
+import model.item.CommentStatus;
+import model.item.Item;
+import model.item.digital.DigitalItem;
+import model.item.digital.Pc;
+import model.item.digital.Ssd;
+import model.item.digital.Usb;
+import model.item.food.Food;
+import model.item.stationary.NoteBook;
+import model.item.stationary.Pen;
+import model.item.stationary.Pencil;
+import model.item.stationary.PencilType;
+import model.item.vehicles.Bike;
+import model.item.vehicles.BikeType;
+import model.item.vehicles.Car;
+import model.user.Admin;
+import model.user.Buyer;
+import model.user.Discount;
+import model.user.request.CommentRequest;
+import model.user.request.IncreaseCreditRequest;
+import model.user.request.Request;
+import model.user.request.SignUpRequest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -153,7 +153,7 @@ public class AdminController {
         for (Item item : admin.getItemArrayList()){
             if (item.getIdItem().equals(idItem)){
                 if (item instanceof DigitalItem || item instanceof Pen || item instanceof Pencil){
-                    ((model.for_item.Discount) item).removeDiscount();
+                    ((model.item.Discount) item).removeDiscount();
                     return;
                 }
             }
