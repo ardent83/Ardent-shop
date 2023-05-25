@@ -2,6 +2,7 @@ package exceptions;
 
 public class EmailException extends InputException{
     public EmailException() {
-        super("Email format is invalid!");
+        super("Email format is invalid!" +
+                "\n...@gmail.com");
     }
 }
