@@ -1,0 +1,51 @@
+.button {
+  -fx-font-family: 'Bell MT';
+  -fx-font-size: 18;
+  -fx-background-color: #222831;
+  -fx-color: #000000;
+  -fx-border: 0;
+  -fx-background-radius: 300px;
+  -fx-transition: 0.3s;
+}
+.button:hover {
+  -fx-background-color: #393E46;
+  -fx-shadow: 20 20 20 20;
+}
+
+#textArea {
+    -fx-text-wrap: none;
+    -fx-background-color: #e2e2e2;
+    -fx-font-size: 22px;
+    -fx-font-family: 'Bell MT';
+    -fx-max-width: 350px;
+    -fx-padding: 5px;
+    -fx-text-alignment: justify;
+    -fx-line-spacing: 1em;
+    -fx-wrap-text: true;
+}
+
+#textItem {
+  -fx-font-family: 'Bell MT';
+  -fx-font-size: 22;
+}
+
+.list-view {
+    -fx-font-size: 22px;
+    -fx-font-family: 'Bell MT';
+    -fx-background-color: rgb(216, 227, 231);
+}
+
+.list-cell {
+    -fx-cursor: hand;
+    -fx-background-color: rgb(81, 196, 211);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.list-cell:even {
+    -fx-background-color: rgb(18, 110, 130);
+}
+
+.list-cell:hover {
+    -fx-background-color: rgb(19, 44, 51);
+}

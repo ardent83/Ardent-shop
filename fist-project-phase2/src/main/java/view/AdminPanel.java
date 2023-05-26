@@ -24,20 +24,29 @@ public class AdminPanel {
         System.out.print("\nA:\\Users\\Admin> ");
         String command = input.nextLine();
         String[] splited = command.split("\\s+");
-        switch (splited[0]) {
-            case "viewRequest" -> viewRequest();
-            case "viewUser" -> viewUser();
-            case "add" -> add(splited);
-            case "remove" -> remove(splited);
-            case "edit" -> edit(splited);
-            case "accept" -> accept(splited);
-            case "rejection" -> rejection(splited);
-            case "help" -> help();
-            case "back" -> new MainPanel().start(new Stage());
-            default -> {
-                System.out.println("\ncommand is wrong!");
-                adminMenu();
+        try {
+            switch (splited[0]) {
+                case "viewRequest" -> viewRequest();
+                case "viewUser" -> viewUser();
+                case "add" -> add(splited);
+                case "remove" -> remove(splited);
+                case "edit" -> edit(splited);
+                case "accept" -> accept(splited);
+                case "rejection" -> rejection(splited);
+                case "help" -> help();
+                case "back" -> new MainPanel().start(new Stage());
+                case "addDiscount" -> adminController.addDiscountToItem(splited[1]);
+                case "removeDiscount" -> adminController.removeDiscountOfItem(splited[1]);
+                case "giveDiscount" -> adminController.GiveDiscountCode();
+                default -> {
+                    System.out.println("\ncommand is wrong!");
+                    adminMenu();
+                }
             }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            adminMenu();
         }
     }
     private void add(String[] splited) {
@@ -200,6 +209,8 @@ public class AdminPanel {
         System.out.println("accept idRequest");
         System.out.println("rejection idRequest");
         System.out.println("back");
+        System.out.println("addDiscount idItem");
+        System.out.println("removeDiscount idItem");
         System.out.println("\n_________________________________________________________________________");
         adminMenu();
     }

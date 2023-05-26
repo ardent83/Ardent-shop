@@ -1,0 +1,63 @@
+.button {
+  -fx-font-family: 'Bell MT';
+  -fx-font-size: 22;
+  -fx-background-color: #222831;
+  -fx-color: #000000;
+  -fx-border: 0;
+  -fx-background-radius: 300px;
+  -fx-transition: 0.3s;
+}
+#textSignUp {
+  -fx-font-family: 'Bell MT';
+  -fx-font-size: 22;
+}
+.button:hover {
+  -fx-background-color: #393E46;
+  -fx-shadow: 20 20 20 20;
+}
+
+#searchField {
+  -fx-background-radius: 25 0px 0px 25;
+  -fx-font-size: 22;
+  -fx-font-family: 'Bell MT';
+  -fx-background-color: #eeeeee;
+  -fx-padding: 10px 1rem;
+}
+
+#SignUp {
+  -fx-background-radius: 0 25px 25px 0;
+  -fx-font-size: 22;
+  -fx-font-family: 'Bell MT';
+  -fx-background-color: #e2e2e2;
+  -fx-padding: 10px 1rem;
+}
+#increaseACField {
+  -fx-background-radius: 0 25px 25px 0;
+  -fx-max-width : 80;
+  -fx-font-size: 22;
+  -fx-font-family: 'Bell MT';
+  -fx-background-color: #e2e2e2;
+  -fx-padding: 10px 1rem;
+}
+#fieldEdit {
+  -fx-background-radius: 0 0px 0px 0;
+  -fx-font-size: 22;
+  -fx-font-family: 'Bell MT';
+  -fx-background-color: #e2e2e2;
+  -fx-padding: 10px 1rem;
+}
+#buttonEdit {
+  -fx-background-radius: 0 25px 25px 0;
+}
+
+#buttonStatic {
+    -fx-background-radius: 25 0 0 25;
+}
+#buttonStatic:hover {
+  -fx-background-color: #222831;
+  -fx-shadow: 0;
+}
+#textBuyer {
+  -fx-font-family: 'Bell MT';
+  -fx-font-size: 22;
+}
