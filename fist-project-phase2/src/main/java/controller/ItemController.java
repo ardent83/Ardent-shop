@@ -1,6 +1,7 @@
 package controller;
 
 import model.item.Category;
+import model.item.Comment;
 import model.item.Item;
 import model.item.SubCategory;
 import model.item.digital.Pc;
@@ -14,6 +15,7 @@ import model.item.vehicles.Bike;
 import model.item.vehicles.BikeType;
 import model.item.vehicles.Car;
 import model.user.Admin;
+import model.user.request.CommentRequest;
 
 import java.util.ArrayList;
 
@@ -184,5 +186,25 @@ public class ItemController {
     }
     public ArrayList<Item> removeAllFilter(){
         return admin.getItemArrayList();
+    }
+
+    public void postAComment(String idItem, String commentText) {
+        for (Item item : admin.getItemArrayList()) {
+            if (item.getIdItem().equals(idItem)) {
+                Comment comment = new Comment(admin, item.getIdItem(), commentText, false);
+                item.getCommentArrayList().add(comment);
+                admin.getRequestArrayList().add(new CommentRequest(comment));
+                return;
+            }
+        }
+    }
+    public ArrayList<Item> searchItem(String nameItem){
+        ArrayList<Item> searchResults = new ArrayList<>();
+        for (Item item : admin.getItemArrayList()){
+            if ((item.getName()).toUpperCase().contains((nameItem.toUpperCase()))){
+                searchResults.add(item);
+            }
+        }
+        return searchResults;
     }
 }
