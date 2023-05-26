@@ -35,12 +35,8 @@ public class Pen extends Stationary implements Discount {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n***********************************************");
-        stringBuilder.append("\nname : ").append(super.getName())
-                .append("\nprice : ").append(super.getPrice())
-                .append("\navailable number : ").append(super.getAvailableNumber())
-                .append("\ncategory : ").append(super.getCategory())
-                .append("\nproducing country : ").append(super.getProducingCountry())
+        stringBuilder.append("\n***********************************************")
+                .append(super.toString())
                 .append("\ncolor : ").append(color)
                 .append("\n______________________________________________________");
         for (Comment comment : super.getCommentArrayList()) {

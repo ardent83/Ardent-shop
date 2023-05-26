@@ -26,13 +26,10 @@ public class Food extends Item {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n***********************************************");
-        stringBuilder.append("name : ").append(super.getName())
-                .append("\nprice : ").append(super.getPrice())
-                .append("\navailable number : ").append(super.getAvailableNumber())
-                .append("\ncategory : ").append(super.getCategory())
+        stringBuilder.append(super.toString())
                 .append("\nproduction date : ").append(productionDate)
                 .append("\nexpiration date : ").append(expirationDate)
-                .append("\n______________________________________________________");
+                .append("\n_______________________________________________");
         for (Comment comment : super.getCommentArrayList()) {
             if (comment.getCommentStatus().equals(CommentStatus.ACCEPTED)){
                 stringBuilder.append(comment);

@@ -26,11 +26,7 @@ public class NoteBook extends Stationary {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n***********************************************");
-        stringBuilder.append("name : ").append(super.getName())
-                .append("\nprice : ").append(super.getPrice())
-                .append("\navailable number : ").append(super.getAvailableNumber())
-                .append("\ncategory : ").append(super.getCategory())
-                .append("\nproducing country : ").append(super.getProducingCountry())
+        stringBuilder.append(super.toString())
                 .append("\nnumber of page : ").append(numberOfPage)
                 .append("\npaper type : ").append(paperType)
                 .append("\n______________________________________________________");

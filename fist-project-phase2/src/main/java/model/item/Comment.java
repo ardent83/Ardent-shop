@@ -42,7 +42,7 @@ public class Comment {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nuser ID : ").append(commentUser);
+        stringBuilder.append("\nuser ID : ").append(commentUser.getId());
         if (buyer){
             stringBuilder.append("\nis a buyer");
         } else {

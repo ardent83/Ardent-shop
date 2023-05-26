@@ -14,4 +14,12 @@ public abstract class Stationary extends Item {
     public String getProducingCountry() {
         return producingCountry;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(super.toString())
+                .append("\nproducing country : ").append(this.producingCountry);
+        return stringBuilder.toString();
+    }
 }

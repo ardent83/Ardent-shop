@@ -13,4 +13,12 @@ public abstract class Vehicles extends Item {
     public String getCompanyName() {
         return companyName;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(super.toString())
+                .append("\ncompany name : ").append(companyName);
+        return stringBuilder.toString();
+    }
 }

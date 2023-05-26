@@ -12,4 +12,12 @@ public abstract class StorageEquipment extends DigitalItem{
     public double getCapacity() {
         return capacity;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(super.toString())
+                .append("\ncapacity : ").append(capacity);
+        return stringBuilder.toString();
+    }
 }

@@ -38,11 +38,7 @@ public class Pencil extends Stationary implements Discount {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n***********************************************");
-        stringBuilder.append("\nname : ").append(super.getName())
-                .append("\nprice : ").append(super.getPrice())
-                .append("\navailable number : ").append(super.getAvailableNumber())
-                .append("\ncategory : ").append(super.getCategory())
-                .append("\nproducing country : ").append(super.getProducingCountry())
+        stringBuilder.append(super.toString())
                 .append("\npencil type : ").append(pencilType)
                 .append("\n______________________________________________________");
         for (Comment comment : super.getCommentArrayList()) {

@@ -173,6 +173,17 @@ public abstract class Item implements Comparable {
         this.scoreArrayList.add(score);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\nname : ").append(this.name)
+                .append("\nScore : ").append(this.averageScore)
+                .append("\nprice : ").append(this.price)
+                .append("\navailable number : ").append(this.availableNumber)
+                .append("\ncategory : ").append(this.category);
+        return stringBuilder.toString();
+    }
+
     static {
         countForId = 0;
     }

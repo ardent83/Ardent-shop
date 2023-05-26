@@ -18,13 +18,7 @@ public class Usb extends StorageEquipment {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n***********************************************");
-        stringBuilder.append("name : ").append(super.getName())
-                .append("\nprice : ").append(super.getPrice())
-                .append("\navailable number : ").append(super.getAvailableNumber())
-                .append("\ncategory : ").append(super.getCategory())
-                .append("\nwight : ").append(super.getWeight())
-                .append("\nvolume : ").append(super.getVolume())
-                .append("\ncapacity : ").append(super.getCapacity())
+        stringBuilder.append(super.toString())
                 .append("\nUSB version : ").append(usbVersion)
                 .append("\n______________________________________________________");
         for (Comment comment : super.getCommentArrayList()) {

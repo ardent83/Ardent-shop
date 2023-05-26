@@ -25,23 +25,17 @@ public class Pc extends DigitalItem {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n***********************************************")
-                .append("\nname : ").append(super.getName())
-                .append("\nScore : ").append(getAverageScore())
-                .append("\nprice : ").append(super.getPrice())
-                .append("\navailable number : ").append(super.getAvailableNumber())
-                .append("\ncategory : ").append(super.getCategory())
-                .append("\nwight : ").append(super.getWeight())
-                .append("\nvolume : ").append(super.getVolume())
+        stringBuilder.append("\n***********************************************");
+        stringBuilder.append(super.toString())
                 .append("\nmodel CPU : ").append(modelCpu)
                 .append("\nRAM capacity : ").append(ramCapacity)
                 .append("\n______________________________________________________");
-                for (Comment comment : super.getCommentArrayList()) {
-                    if (comment.getCommentStatus().equals(CommentStatus.ACCEPTED)){
-                        stringBuilder.append(comment);
-                        stringBuilder.append("\n______________________________________________________");
-                    }
-                }
+        for (Comment comment : super.getCommentArrayList()) {
+            if (comment.getCommentStatus().equals(CommentStatus.ACCEPTED)) {
+                stringBuilder.append(comment);
+                stringBuilder.append("\n______________________________________________________");
+            }
+        }
                 stringBuilder.append("\n***********************************************");
         return stringBuilder.toString();
     }

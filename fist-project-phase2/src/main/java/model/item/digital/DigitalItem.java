@@ -38,4 +38,13 @@ public abstract class DigitalItem extends Item  implements Discount {
     public double getDiscountPercent() {
         return discountPercent;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(super.toString())
+                .append("\nwight : ").append(this.weight)
+                .append("\nvolume : ").append(this.volume);
+        return stringBuilder.toString();
+    }
 }
