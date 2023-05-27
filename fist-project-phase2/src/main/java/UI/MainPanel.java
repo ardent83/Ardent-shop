@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.item.Category;
 import model.user.Admin;
+import model.user.Buyer;
 
 import java.util.ArrayList;
 import java.util.Properties;
@@ -98,7 +99,8 @@ public class MainPanel extends Application {
         stackPane.setCursor(Cursor.HAND);
 
         stackPane.setOnMouseClicked(mouseEvent -> {
-            new ItemPanel(itemController.searchItem(textField.getText())).start(new Stage());
+//            new ItemPanel(itemController.searchItem(textField.getText())).start(new Stage());
+            new ItemPanelBuyer(admin.getItemArrayList(),new Buyer("","","")).start(new Stage());
             stage.close();
         });
         return hBox;

@@ -49,3 +49,32 @@
 .list-cell:hover {
     -fx-background-color: rgb(19, 44, 51);
 }
+
+#buttonStatic {
+    -fx-background-radius: 25 0 0 25;
+}
+#leftButton {
+    -fx-background-radius: 25 0 0 25;
+    -fx-font-size: 22px;
+    -fx-font-family: 'Bell MT';
+}
+#rightButton {
+    -fx-background-radius: 0 25 25 0;
+    -fx-font-size: 22px;
+    -fx-font-family: 'Bell MT';
+}
+#buttonStatic:hover {
+  -fx-background-color: #222831;
+  -fx-shadow: 0;
+}
+#numberItem {
+    -fx-background-radius: 0 0 0 0;
+    -fx-max-width : 50;
+    -fx-font-size: 22;
+    -fx-font-family: 'Bell MT';
+    -fx-background-color: #e2e2e2;
+    -fx-padding: 10px 1rem;
+}
+#buttonEdit {
+  -fx-background-radius: 0 25px 25px 0;
+}
