@@ -32,9 +32,9 @@ public class SignUpRequest extends Request {
     }
 
     public String toString() {
-        return (new StringBuilder().append("\nRequest ID : ").append(super.idRequest).append("\n")
-                .append("\nemail : ").append(email)
-                .append("\nnumber : ").append(number)
-                .append("\npassword : ").append( password).toString());
+        return ("\nRequest ID : " + super.idRequest +
+                "\nemail : " + email +
+                "\nnumber : " + number +
+                "\npassword : " + password);
     }
 }
