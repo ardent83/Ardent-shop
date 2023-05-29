@@ -143,7 +143,7 @@ public class Cart extends Application {
         buttonComment.setAlignment(Pos.CENTER_RIGHT);
         buttonComment.setCursor(Cursor.HAND);
         buttonComment.setOnMouseClicked(mouseEvent -> {
-            root.setRight(vBoxBuy());
+            root.setRight(vBoxBuy(stage));
         });
 
         Button buttonMinus = new Button("- ");
@@ -205,7 +205,7 @@ public class Cart extends Application {
         hBox.getChildren().addAll(scrollPane,vBoxButton);
         return hBox;
     }
-    private VBox vBoxBuy(){
+    private VBox vBoxBuy(Stage stage){
         VBox vBox = new VBox();
         vBox.setBackground(new Background(new BackgroundFill(Color.rgb(216, 227, 231),CornerRadii.EMPTY,Insets.EMPTY)));
         vBox.setPadding(new Insets(40));
@@ -228,7 +228,7 @@ public class Cart extends Application {
         textField2.setEffect(effect);
 
         Button buttonPlus = new Button("+");
-        Button buttonBuy = new Button("Finalized");
+        Button buttonBuy = new Button("Buy");
 
         HBox hBox = new HBox();
         hBox.setSpacing(5);
@@ -273,9 +273,17 @@ public class Cart extends Application {
                     vBox.getChildren().remove(buttonBuy);
                     vBox.getChildren().addAll(text,buttonBuy);
                 }
+                buttonBuy.setText("Finalized");
                 buttonBuy.setOnMouseClicked(mouseEvent1 -> {
                     try {
                         cartController.finalizeCart(buyer,arrayListDiscountCode,cartController.getAmount(buyer, arrayListDiscountCode));
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("The purchase was made successfully!");
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == ButtonType.OK) {
+                            new BuyerPanel(buyer).start(new Stage());
+                            stage.close();
+                        }
                     } catch (Exception e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText(e.getMessage());
