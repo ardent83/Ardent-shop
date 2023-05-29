@@ -61,3 +61,33 @@
   -fx-font-family: 'Bell MT';
   -fx-font-size: 22;
 }
+.list-view {
+    -fx-font-size: 22px;
+    -fx-font-family: 'Bell MT';
+    -fx-border-color: #0D7377;
+}
+
+.list-cell {
+    -fx-cursor: hand;
+    -fx-background-color: rgb(81, 196, 211);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.list-cell:even {
+    -fx-background-color: rgb(18, 110, 130);
+}
+
+.list-view .scroll-bar {
+    -fx-border-color: #0D7377;
+    -fx-border-radius: 30;
+}
+
+.list-view .scroll-bar .thumb {
+   -fx-opacity : 1;
+   -fx-color : #00ADB5;
+}
+
+.list-view .scroll-bar:vertical{
+    -fx-opacity : 0.1;
+}

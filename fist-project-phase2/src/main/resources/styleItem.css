@@ -78,3 +78,35 @@
 #buttonEdit {
   -fx-background-radius: 0 25px 25px 0;
 }
+#SignUp {
+  -fx-background-radius: 0 25px 25px 0;
+  -fx-font-size: 17;
+  -fx-max-width : 110;
+  -fx-font-family: 'Bell MT';
+  -fx-background-color: #e2e2e2;
+  -fx-padding: 10px 1rem;
+}
+#scroller {
+    -fx-border-color: #0D7377;
+    -fx-border-radius: 30;
+}
+#scroller .thumb {
+    -fx-opacity : 1;
+    -fx-color : #00ADB5;
+}
+#scroller .scroll-bar {
+    -fx-opacity : 0.1;
+}
+
+#FieldDiscount {
+    -fx-background-radius: 25 25 25 25;
+    -fx-font-size: 17;
+    -fx-max-width : 150;
+    -fx-font-family: 'Bell MT';
+    -fx-background-color: #efefef;
+    -fx-padding: 10px 1rem;
+}
+
+#score {
+   -fx-font-size: 32;
+}
