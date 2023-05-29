@@ -7,7 +7,7 @@ public class CommentRequest extends Request{
         this.comment = comment;
     }
 
-    private Comment comment;
+    private final Comment comment;
 
     public Comment getComment() {
         return comment;
@@ -15,7 +15,7 @@ public class CommentRequest extends Request{
 
     @Override
     public String toString() {
-        return (new StringBuilder().append("\nRequest ID : ").append(super.idRequest)
-                .append(comment.toString()).toString());
+        return ("\nRequest ID : " + super.idRequest +
+                comment.toString());
     }
 }

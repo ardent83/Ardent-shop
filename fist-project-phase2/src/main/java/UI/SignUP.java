@@ -115,12 +115,8 @@ public class SignUP extends Application {
         buttonSubmit.setCursor(Cursor.HAND);
 
         buttonCancel.setOnMouseClicked(mouseEvent -> {
-            try {
-                new MainPanel().start(new Stage());
-                stage.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            new MainPanel().start(new Stage());
+            stage.close();
         });
 
         buttonSubmit.setOnMouseClicked(mouseEvent -> {

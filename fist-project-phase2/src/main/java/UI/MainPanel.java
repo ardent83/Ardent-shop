@@ -8,7 +8,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -16,16 +15,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.item.Category;
+import model.item.Item;
+import model.item.food.Food;
 import model.user.Admin;
 import model.user.Buyer;
+import model.user.Discount;
+import model.user.PurchaseInvoice;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Properties;
+import java.util.HashMap;
 
 public class MainPanel extends Application {
     public MainPanel() {
@@ -99,8 +102,7 @@ public class MainPanel extends Application {
         stackPane.setCursor(Cursor.HAND);
 
         stackPane.setOnMouseClicked(mouseEvent -> {
-//            new ItemPanel(itemController.searchItem(textField.getText())).start(new Stage());
-            new ItemPanelBuyer(admin.getItemArrayList(),new Buyer("","","")).start(new Stage());
+            new ItemPanel(itemController.searchItem(textField.getText())).start(new Stage());
             stage.close();
         });
         return hBox;

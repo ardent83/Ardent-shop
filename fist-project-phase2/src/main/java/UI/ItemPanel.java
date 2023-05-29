@@ -3,25 +3,21 @@ package UI;
 import controller.ItemController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.item.Item;
-import model.item.food.Food;
 import model.user.Admin;
 
 import java.util.ArrayList;
@@ -44,8 +40,6 @@ public class ItemPanel extends Application {
         root.setTop(hBoxTop(stage));
 
         Scene scene = new Scene(root);
-        stage.setMinWidth(1100);
-        stage.setMinHeight(600);
         scene.getStylesheets().add("styleItem.css");
         stage.setScene(scene);
         stage.setTitle("Item Panel");
@@ -58,6 +52,7 @@ public class ItemPanel extends Application {
     private HBox hBoxTop(Stage stage){
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(2));
+        hBox.setSpacing(15);
         hBox.setBackground(new Background(new BackgroundFill(Color.rgb(0, 171, 179),CornerRadii.EMPTY,Insets.EMPTY)));
         Image imageLogOut = new Image("iconLogOut.png");
         ImageView viewOut = new ImageView(imageLogOut);
@@ -66,7 +61,17 @@ public class ItemPanel extends Application {
             new MainPanel().start(new Stage());
             stage.close();
         });
-        hBox.getChildren().addAll(viewOut);
+
+        Button buttonSort = new Button("Sort");
+        HBox hBoxButton = new HBox(buttonSort);
+        hBoxButton.setPadding(new Insets(15));
+        buttonSort.setCursor(Cursor.HAND);
+        buttonSort.setOnMouseClicked(mouseEvent -> {
+            this.items.sort(Item::compareTo);
+            new ItemPanel(this.items).start(new Stage());
+            stage.close();
+        });
+        hBox.getChildren().addAll(viewOut, hBoxButton);
         return hBox;
     }
     private VBox vBoxList(BorderPane root){
@@ -79,7 +84,7 @@ public class ItemPanel extends Application {
 
         Pagination pagination = new Pagination();
         pagination.setCurrentPageIndex(0);
-        pagination.setPageCount((items.size()/10));
+        pagination.setPageCount((int) Math.ceil(items.size()/9.0));
         pagination.setMaxPageIndicatorCount(4);
         listView.setItems(FXCollections.observableArrayList(createPage(pagination.getCurrentPageIndex())));
 
@@ -96,7 +101,7 @@ public class ItemPanel extends Application {
                     protected void updateItem(Item item, boolean empty) {
                         super.updateItem(item, empty);
                         if (item != null) {
-                            setText("Name : " + item.getName() + "\n$" + item.getPrice() + "\n" + item.getAverageScore());
+                            setText("Name : " + item.getName() + "\n$" + item.getPrice() + "\nScore : " + item.getAverageScore());
                         } else {
                             setText("");
                         }
@@ -120,11 +125,11 @@ public class ItemPanel extends Application {
 
     private HBox hBoxItem(Item item, BorderPane root){
         HBox hBox = new HBox();
-        VBox vBox = new VBox();
         hBox.setPadding(new Insets(30));
         hBox.setSpacing(50);
         hBox.setBackground(new Background(new BackgroundFill(Color.rgb(216, 227, 231),CornerRadii.EMPTY,Insets.EMPTY)));
-        Text text = new Text(item.toString());
+        Text text = new Text((item.toString()+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"
+                +"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"));
         text.setId("textItem");
         Button buttonComment = new Button("Post Comment");
         buttonComment.setAlignment(Pos.CENTER_RIGHT);
@@ -132,8 +137,20 @@ public class ItemPanel extends Application {
         buttonComment.setOnMouseClicked(mouseEvent -> {
             root.setRight(vBoxComment(root,item.getIdItem()));
         });
-        vBox.getChildren().addAll(text);
-        hBox.getChildren().addAll(vBox, buttonComment);
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPadding(new Insets(10));
+        scrollPane.setId("scroller");
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        scrollPane.setBackground(new Background(new BackgroundFill(Color.rgb(216, 227, 231),CornerRadii.EMPTY,Insets.EMPTY)));
+        VBox vBox = new VBox(text);
+        vBox.setPadding(new Insets(20));
+        vBox.setBackground(new Background(new BackgroundFill(Color.rgb(216, 227, 231),CornerRadii.EMPTY,Insets.EMPTY)));
+
+        scrollPane.setContent(vBox);
+
+        hBox.getChildren().addAll(scrollPane, buttonComment);
         return hBox;
     }
     private VBox vBoxComment(BorderPane root,String idItem){
@@ -167,8 +184,11 @@ public class ItemPanel extends Application {
         return vBox;
     }
     private List<Item> createPage(int pageIndex) {
-        int fromIndex = pageIndex * 10;
-        int toIndex = Math.min(fromIndex + 10, items.size());
-        return (items.subList(fromIndex, toIndex));
+        int fromIndex = pageIndex * 9;
+        int toIndex = Math.min(fromIndex + 9, items.size());
+        if (fromIndex < items.size()){
+            return (items.subList(fromIndex, toIndex));
+        }
+        return new ArrayList<>();
     }
 }

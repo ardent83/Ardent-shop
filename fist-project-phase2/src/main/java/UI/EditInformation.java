@@ -96,7 +96,7 @@ public class EditInformation extends Application {
         buttonEmail.setCursor(Cursor.HAND);
         buttonEmail.setOnMouseClicked(mouseEvent -> {
             try {
-                informationController.editEmail(buyer,textEmailField.getText());
+                informationController.editEmail(textEmailField.getText());
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setContentText("Edit was done successfully.");
                 alert.showAndWait();
@@ -131,7 +131,7 @@ public class EditInformation extends Application {
         buttonNumber.setCursor(Cursor.HAND);
         buttonNumber.setOnMouseClicked(mouseEvent -> {
             try {
-                informationController.editNumber(buyer,textNumberField.getText());
+                informationController.editNumber(textNumberField.getText());
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setContentText("Edit was done successfully.");
                 alert.showAndWait();
@@ -166,7 +166,7 @@ public class EditInformation extends Application {
         buttonPassword.setCursor(Cursor.HAND);
         buttonPassword.setOnMouseClicked(mouseEvent -> {
             try {
-                informationController.editPassword(buyer,textPasswordField.getText());
+                informationController.editPassword(textPasswordField.getText());
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setContentText("Edit was done successfully.");
                 alert.showAndWait();

@@ -14,7 +14,7 @@ public class EditInformationController {
 
     private final Admin admin = Admin.getAdmin();
     private final Buyer buyer;
-    public void editEmail(Buyer buyer, String email) throws Exception {
+    public void editEmail(String email) throws Exception {
         for (Buyer buyer1 : admin.getBuyerArrayList()){
             if (buyer1.getEmail().equals(email)){
                 throw new AvailableEmailException();
@@ -30,7 +30,7 @@ public class EditInformationController {
         }
         throw new EmailException();
     }
-    public void editNumber(Buyer buyer, String number) throws Exception {
+    public void editNumber(String number) throws Exception {
         for (Buyer buyer1 : admin.getBuyerArrayList()){
             if (buyer1.getNumber().equals(number)){
                 throw new AvailableNumberException();
@@ -46,7 +46,7 @@ public class EditInformationController {
         }
         throw new NumberPhoneException();
     }
-    public void editPassword(Buyer buyer, String password) throws Exception {
+    public void editPassword(String password) throws Exception {
         if (buyer.getPassword().equals(password)){
             throw new AvailablePasswordException();
         }
