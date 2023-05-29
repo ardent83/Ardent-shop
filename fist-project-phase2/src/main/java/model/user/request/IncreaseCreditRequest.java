@@ -20,8 +20,8 @@ public class IncreaseCreditRequest extends Request{
     }
     @Override
     public String toString() {
-        return (new StringBuilder().append("\nRequest ID : ").append(super.idRequest).append("\n")
-                .append(buyer.toString())
-                .append("\nIncrease Amount : ").append(increaseAmount).toString());
+        return ("\nRequest ID : " + super.idRequest + "\n" +
+                buyer.toString() +
+                "\nIncrease Amount : " + increaseAmount);
     }
 }

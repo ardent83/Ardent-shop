@@ -1,12 +1,10 @@
 package model.user;
 
-import controller.ItemController;
 import model.item.Comment;
 import model.item.Item;
 import model.item.Score;
 import model.user.request.CommentRequest;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,15 +13,14 @@ public class Buyer extends User {
         super(email, number, password, UserType.BUYER);
         this.cart = new HashMap<>();
         this.purchaseHistoryArrayList = new ArrayList<>();
-        this.itemController = new ItemController();
         this.discountCodes = new ArrayList<>();
         this.accountCredit = 0;
     }
     Admin admin = Admin.getAdmin();
-    private HashMap<Item,Integer> cart;
-    private ArrayList<PurchaseInvoice> purchaseHistoryArrayList;
+    private final HashMap<Item,Integer> cart;
+    private final ArrayList<PurchaseInvoice> purchaseHistoryArrayList;
     private double accountCredit;
-    private ArrayList<Discount> discountCodes;
+    private final ArrayList<Discount> discountCodes;
 
     public ArrayList<Discount> getDiscountCodes() {
         return discountCodes;
@@ -47,10 +44,6 @@ public class Buyer extends User {
     public ArrayList<Item> getItemArrayList(){
         return admin.getItemArrayList();
     }
-    private ItemController itemController;
-    public ItemController getFilterController() {
-        return itemController;
-    }
 
     public ArrayList<PurchaseInvoice> getPurchaseHistoryArrayList() {
         return purchaseHistoryArrayList;
@@ -60,7 +53,7 @@ public class Buyer extends User {
         for (Item item : admin.getItemArrayList()){
             if(item.getIdItem().equals(idItem)){
                 for (PurchaseInvoice purchaseInvoice : this.purchaseHistoryArrayList){
-                    for (Item item1 : purchaseInvoice.getItemArrayList().keySet()){
+                    for (Item item1 : purchaseInvoice.getItemIntegerHashMap().keySet()){
                         if(item1.getIdItem().equals(idItem)){
                             Comment comment = new Comment(this, item.getIdItem(), commentText, true);
                             item.getCommentArrayList().add(comment);
@@ -77,20 +70,15 @@ public class Buyer extends User {
         }
     }
 
-    public boolean postScore(String idItem, double score){
-        for (Item item : admin.getItemArrayList()) {
-            if (item.getIdItem().equals(idItem)){
-                for (PurchaseInvoice purchaseInvoice : this.purchaseHistoryArrayList){
-                    for (Item item1 : purchaseInvoice.getItemArrayList().keySet()){
-                        if(item1.getIdItem().equals(item.getIdItem())){
-                            new Score(this,score,item);
-                            return true;
-                        }
-                    }
+    public void postScore(String idItem, double score) {
+        for (PurchaseInvoice purchaseInvoice : this.purchaseHistoryArrayList) {
+            for (Item item : purchaseInvoice.getItemIntegerHashMap().keySet()) {
+                if (item.getIdItem().equals(idItem)) {
+                    new Score(this, score, item);
+                    return;
                 }
             }
         }
-        return false;
     }
 
     public void setAccountCredit(double accountCredit) {

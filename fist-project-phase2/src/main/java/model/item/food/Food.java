@@ -33,7 +33,7 @@ public class Food extends Item {
         for (Comment comment : super.getCommentArrayList()) {
             if (comment.getCommentStatus().equals(CommentStatus.ACCEPTED)){
                 stringBuilder.append(comment);
-                stringBuilder.append("\n______________________________________________________");
+                stringBuilder.append("\n_______________________________________________");
             }
         }
         stringBuilder.append("\n***********************************************");

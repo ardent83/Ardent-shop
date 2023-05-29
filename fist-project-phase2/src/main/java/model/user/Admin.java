@@ -23,9 +23,9 @@ public class Admin extends User {
         }
         return admin;
     }
-    private ArrayList<Item> itemArrayList;
-    private ArrayList<Buyer> buyerArrayList;
-    private ArrayList<Request> requestArrayList;
+    private final ArrayList<Item> itemArrayList;
+    private final ArrayList<Buyer> buyerArrayList;
+    private final ArrayList<Request> requestArrayList;
 
     public ArrayList<Request> getRequestArrayList() {
         return requestArrayList;

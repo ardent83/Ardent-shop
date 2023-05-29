@@ -2,14 +2,18 @@ package view;
 
 import UI.MainPanel;
 import controller.AdminController;
+import controller.ItemController;
 import javafx.stage.Stage;
+import model.item.Category;
 import model.item.Item;
+import model.item.SubCategory;
 import model.item.stationary.PencilType;
 import model.item.vehicles.BikeType;
 import model.user.Admin;
 import model.user.Buyer;
 import model.user.request.Request;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AdminPanel {
@@ -35,9 +39,22 @@ public class AdminPanel {
                 case "rejection" -> rejection(splited);
                 case "help" -> help();
                 case "back" -> new MainPanel().start(new Stage());
-                case "addDiscount" -> adminController.addDiscountToItem(splited[1]);
-                case "removeDiscount" -> adminController.removeDiscountOfItem(splited[1]);
-                case "giveDiscount" -> adminController.GiveDiscountCode();
+                case "addDiscount" -> {
+                    adminController.addDiscountToItem(splited[1]);
+                    adminMenu();
+                }
+                case "removeDiscount" -> {
+                    adminController.removeDiscountOfItem(splited[1]);
+                    adminMenu();
+                }
+                case "giveDiscount" -> {
+                    adminController.GiveDiscountCode();
+                    adminMenu();
+                }
+                case "viewItems" -> {
+                    viewItems();
+                    adminMenu();
+                }
                 default -> {
                     System.out.println("\ncommand is wrong!");
                     adminMenu();
@@ -190,6 +207,28 @@ public class AdminPanel {
         }
         adminMenu();
     }
+    private void viewItems() {
+        ItemController itemController = new ItemController();
+        ArrayList<Item> items = new ArrayList<>(itemController.filterCategory(Category.DIGITAL));
+        items.addAll(itemController.filterSubCategory(SubCategory.PEN));
+        items.addAll(itemController.filterSubCategory(SubCategory.PENCIL));
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Item item : items) {
+            stringBuilder.append("\nName : ").append(item.getName());
+            stringBuilder.append("\nItem ID : ").append(item.getIdItem());
+            stringBuilder.append("\nScore : ").append(item.getAverageScore());
+            if (item.getAvailableNumber() > 3) {
+                stringBuilder.append("\nPrice : ").append(item.getPrice());
+            } else if (item.getAvailableNumber() <= 3 && item.getAvailableNumber() > 0) {
+                stringBuilder.append("\nPrice : ").append(item.getPrice());
+                stringBuilder.append("\nOnly ").append(item.getAvailableNumber()).append(" left in stock!");
+            } else if (item.getAvailableNumber() == 0) {
+                stringBuilder.append("\nNot available!");
+            }
+            stringBuilder.append("\n___________________________________");
+        }
+        System.out.println(stringBuilder);
+    }
     private void  help() {
         System.out.println("viewRequest");
         System.out.println("viewUser");
@@ -208,9 +247,11 @@ public class AdminPanel {
         System.out.println("edit availableNumber itemID newAvailableNumber");
         System.out.println("accept idRequest");
         System.out.println("rejection idRequest");
-        System.out.println("back");
         System.out.println("addDiscount idItem");
         System.out.println("removeDiscount idItem");
+        System.out.println("giveDiscount");
+        System.out.println("viewItems");
+        System.out.println("back");
         System.out.println("\n_________________________________________________________________________");
         adminMenu();
     }

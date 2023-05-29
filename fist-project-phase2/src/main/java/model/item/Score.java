@@ -11,7 +11,7 @@ public class Score {
         item.addScore(this);
     }
     private final User user;
-    private double score;
+    private final double score;
     private final Item item;
 
     public User getUser() {
