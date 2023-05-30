@@ -28,7 +28,7 @@ public abstract class Item implements Comparable {
     private static int countForId;
     private final String idItem;
     private String name;
-    private double price;
+    protected double price;
     private int availableNumber;
     private double averageScore;
     private final Category category;

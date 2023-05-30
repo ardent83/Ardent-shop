@@ -9,18 +9,23 @@ public class Pencil extends Stationary implements Discount {
     public Pencil(String name, double price, int availableNumber, String producingCountry, PencilType pencilType) {
         super(name, price, availableNumber, Category.STATIONERY, producingCountry);
         this.pencilType = pencilType;
+        this.originalPrice = price;
     }
-
+    private double originalPrice;
     @Override
     public void addDiscount(double discountPercent) {
         this.discountPercent = discountPercent;
-        this.setPrice(this.getPrice() * discountPercent / 100);
+        super.price = (this.getPrice() * (100 - discountPercent) / 100);
     }
 
     @Override
     public void removeDiscount() {
-        this.setPrice(this.getPrice() * 100 / this.discountPercent);
-        discountPercent = 0;
+        super.price = originalPrice;
+    }
+    @Override
+    public void setPrice(double price) {
+        super.setPrice(price);
+        this.originalPrice = price;
     }
 
     private final PencilType pencilType;

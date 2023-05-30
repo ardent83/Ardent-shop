@@ -9,20 +9,23 @@ public abstract class DigitalItem extends Item  implements Discount {
         super(name, price, availableNumber, category);
         this.weight = weight;
         this.volume = volume;
+        this.originalPrice = price;
     }
-
+    private double originalPrice;
     @Override
     public void addDiscount(double discountPercent) {
         this.discountPercent = discountPercent;
-        this.setPrice(this.getPrice() * discountPercent / 100);
+        super.price = (this.getPrice() * (100 - discountPercent) / 100);
     }
 
     @Override
     public void removeDiscount() {
-        if (discountPercent != 0){
-            this.setPrice(this.getPrice() * 100 / this.discountPercent);
-            discountPercent = 0;
-        }
+        super.price = originalPrice;
+    }
+    @Override
+    public void setPrice(double price) {
+        super.setPrice(price);
+        this.originalPrice = price;
     }
 
     private final double weight;
