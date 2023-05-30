@@ -50,12 +50,15 @@ public class PurchaseInvoices extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("styleItem.css");
         stage.setScene(scene);
-        stage.setTitle("Item Panel");
+        stage.setTitle("Purchase Invoices");
         stage.getIcons().add(new Image("icon.png"));
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
+        stage.setOnCloseRequest(windowEvent -> {
+            new ByeWindow().start(new Stage());
+        });
     }
 
     private HBox hBoxTop(Stage stage){

@@ -2,6 +2,7 @@ package UI;
 
 import controller.ItemController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,6 +21,9 @@ import javafx.util.Callback;
 import model.user.Admin;
 import model.user.Buyer;
 import model.user.Discount;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class BuyerPanel extends Application {
@@ -50,6 +54,9 @@ public class BuyerPanel extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
+        stage.setOnCloseRequest(windowEvent -> {
+            new ByeWindow().start(new Stage());
+        });
     }
 
     private HBox paneSearch(Stage stage){

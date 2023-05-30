@@ -9,7 +9,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws Exception {
         new MainPanel().start(stage);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         launch();
     }
 }

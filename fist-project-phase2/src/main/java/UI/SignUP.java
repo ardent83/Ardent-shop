@@ -46,6 +46,9 @@ public class SignUP extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
+        stage.setOnCloseRequest(windowEvent -> {
+            new ByeWindow().start(new Stage());
+        });
     }
     private VBox inputVbox(Stage stage){
         VBox vBox = new VBox();

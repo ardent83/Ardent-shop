@@ -2,6 +2,7 @@ package UI;
 
 import controller.IncreaseACController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -21,6 +22,8 @@ import javafx.stage.Stage;
 import model.user.Buyer;
 
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class IncreaseAC extends Application {
     public IncreaseAC(Buyer buyer) {
@@ -43,6 +46,9 @@ public class IncreaseAC extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
+        stage.setOnCloseRequest(windowEvent -> {
+            new ByeWindow().start(new Stage());
+        });
     }
 
     private BorderPane increaseAC(Stage stage){

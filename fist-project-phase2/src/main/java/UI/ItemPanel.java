@@ -2,6 +2,7 @@ package UI;
 
 import controller.ItemController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,6 +23,8 @@ import model.user.Admin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ItemPanel extends Application {
     public ItemPanel(ArrayList<Item> items) {
@@ -48,6 +51,9 @@ public class ItemPanel extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
+        stage.setOnCloseRequest(windowEvent -> {
+            new ByeWindow().start(new Stage());
+        });
     }
     private HBox hBoxTop(Stage stage){
         HBox hBox = new HBox();

@@ -4,6 +4,7 @@ package UI;
 import controller.ItemBuyerController;
 import controller.ItemController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,6 +29,8 @@ import model.user.Buyer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ItemPanelBuyer extends Application {
     public ItemPanelBuyer(ArrayList<Item> items, Buyer buyer) {
@@ -60,6 +63,9 @@ public class ItemPanelBuyer extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
+        stage.setOnCloseRequest(windowEvent -> {
+            new ByeWindow().start(new Stage());
+        });
     }
     private HBox hBoxTop(Stage stage){
         HBox hBox = new HBox();

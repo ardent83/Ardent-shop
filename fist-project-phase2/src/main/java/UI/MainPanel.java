@@ -26,6 +26,7 @@ import model.user.Buyer;
 import model.user.Discount;
 import model.user.PurchaseInvoice;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,6 +55,9 @@ public class MainPanel extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
+        stage.setOnCloseRequest(windowEvent -> {
+            new ByeWindow().start(new Stage());
+        });
     }
 
     private BorderPane borderPaneTop(Stage stage) {

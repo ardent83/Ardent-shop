@@ -2,6 +2,7 @@ package UI;
 
 import controller.EditInformationController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -15,6 +16,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.user.Buyer;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class EditInformation extends Application {
@@ -38,6 +42,10 @@ public class EditInformation extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
+
+        stage.setOnCloseRequest(windowEvent -> {
+            new ByeWindow().start(new Stage());
+        });
     }
     private BorderPane editStage(Stage stage){
         BorderPane root = new BorderPane();

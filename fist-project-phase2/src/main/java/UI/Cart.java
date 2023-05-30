@@ -2,6 +2,7 @@ package UI;
 
 import controller.CartController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -48,7 +49,9 @@ public class Cart extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
-
+        stage.setOnCloseRequest(windowEvent -> {
+            new ByeWindow().start(new Stage());
+        });
     }
     private BorderPane paneTop(Stage stage) {
         BorderPane root = new BorderPane();

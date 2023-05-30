@@ -2,6 +2,7 @@ package UI;
 
 import controller.LogInController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -19,6 +20,9 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import view.AdminPanel;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LogIn extends Application {
     public LogIn() {
@@ -45,7 +49,9 @@ public class LogIn extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
-
+        stage.setOnCloseRequest(windowEvent -> {
+            new ByeWindow().start(new Stage());
+        });
     }
 
     private VBox inputVbox(Stage stage) {
